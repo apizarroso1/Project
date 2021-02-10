@@ -1,5 +1,5 @@
 package ejerciciosProg;
-
+import daw.com.Teclado;
 public class Pelicula {
 	
 	private String titulo;
@@ -7,6 +7,13 @@ public class Pelicula {
 	private int edadMinima;
 	private String director;
 	
+	//constructor por defecto
+	public Pelicula() {
+		this.titulo = "";
+		this.duracion = 0;
+		this.edadMinima = 0;
+		this.director = "";
+	}
 	//constructor
 	public Pelicula(String titulo, int duracion, int edadMinima, String director) {
 		this.titulo = titulo;
@@ -47,6 +54,17 @@ public class Pelicula {
 	
 	public void setDirector(String director) {
 		this.director = director;
+	}
+	
+	//metodos adicionales
+	public void leerTitulo() {
+		this.titulo = Teclado.leerString("Titulo de la película");
+	}
+	
+	public void leerDatos() {
+		this.edadMinima = Teclado.leerInt("Edad mínima");
+		this.duracion = Teclado.leerInt("Duración");
+		this.director = Teclado.leerString("Director");
 	}
 
 }

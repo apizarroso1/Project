@@ -25,6 +25,7 @@ public class SistemaBancario {
 		
 		b1.ingresarDinero();
 		
+		System.out.println("Se ha ingresado dinero a la cuenta del usuario 1");
 		System.out.println(c1.toString());
 		System.out.println(b1.toString());
 		System.out.println(c2.toString());
@@ -34,6 +35,7 @@ public class SistemaBancario {
 		
 		b2.retirarDinero();
 		
+		System.out.println("Se ha retirado dinero de la cuenta del usuario 2");
 		System.out.println(c1.toString());
 		System.out.println(b1.toString());
 		System.out.println(c2.toString());
@@ -43,6 +45,7 @@ public class SistemaBancario {
 		
 		c2.darBaja();
 		
+		System.out.println("Se ha dado de baja la cuenta del usuario 2");
 		System.out.println(c1.toString());
 		System.out.println(b1.toString());
 		System.out.println(c3.toString());

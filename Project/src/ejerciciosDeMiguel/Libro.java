@@ -1,4 +1,4 @@
-package ejerciciosProg;
+package ejerciciosDeMiguel;
 
 import java.util.Arrays;
 
