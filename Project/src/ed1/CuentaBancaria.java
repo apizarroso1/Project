@@ -38,7 +38,7 @@ public class CuentaBancaria {
 		float ingreso;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca su ingreso");
-		ingreso = sc.nextInt();
+		ingreso = sc.nextFloat();
 		
 		if (ingreso < 1) {
 			System.out.println("Cantidad erronea. Error.");
