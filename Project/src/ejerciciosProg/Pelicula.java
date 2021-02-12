@@ -22,6 +22,15 @@ public class Pelicula {
 		this.director = director;
 	}
 	
+	public Pelicula(String titulo) {
+		this (titulo, 0, 0, "");
+	}
+	
+	//Copia
+	public Pelicula(Pelicula original) {
+		this (original.titulo, original.duracion, original.edadMinima, original.director);
+	}
+	
 	//getters
 	public String getTitulo() {
 		return this.titulo;
@@ -45,10 +54,18 @@ public class Pelicula {
 	}
 	
 	public void setDuracion(int duracion) {
+		
+		if (duracion < 0) {
+			duracion = 0;
+		}
 		this.duracion = duracion;
 	}
 	
 	public void setEdadMinima(int edadMinima) {
+		
+		if (edadMinima < 0) {
+			edadMinima = 0;
+		}
 		this.edadMinima = edadMinima;
 	}
 	
@@ -58,7 +75,7 @@ public class Pelicula {
 	
 	//metodos adicionales
 	public void leerTitulo() {
-		this.titulo = Teclado.leerString("Titulo de la pelÃ­cula");
+		this.titulo = Teclado.leerString("\nTítulo de la película");
 	}
 	
 	public void leerDatos() {

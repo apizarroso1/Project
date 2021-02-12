@@ -2,17 +2,17 @@ package ejerciciosProg;
 
 public class Cine {
 
-	private int precio;
+	private float precio;
 	private String peli;
 	
 	//constructor
-	public Cine(int precio, String peli) {
+	public Cine(float precio, String peli) {
 		this.precio = precio;
 		this.peli = peli;
 	}
 	
 	//setters
-	public void setPrecio(int precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 	
@@ -21,7 +21,7 @@ public class Cine {
 	}
 	
 	//getters
-	public int getPrecio() {
+	public float getPrecio() {
 		return this.precio;
 	}
 	
