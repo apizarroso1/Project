@@ -10,7 +10,7 @@ public class Validacion
 	{
 		if ((seleccion < 1) || (seleccion > 9))
 		{
-			System.out.println("\nError: selección mal introducida");
+			System.out.println("\nError: selecciï¿½n mal introducida");
 		}
 	}
 		 
@@ -30,7 +30,7 @@ public class Validacion
 	
 	public static boolean validarMultiplicacion(float n1, float n2)
 	{
-		continuar = validarConfirmacion("multiplicación");
+		continuar = validarConfirmacion("multiplicaciï¿½n");
 		
 		return continuar;
 	}
@@ -40,18 +40,18 @@ public class Validacion
 		
 		if (validarNumero(n1) && validarNumero(n2) && (n1 != 0) && (n2 != 0))
 		{
-			continuar = validarConfirmacion("división");
+			continuar = validarConfirmacion("divisiï¿½n");
 		}
 		else 
 		{
 			if (n1 == 0)
 			{
-				System.out.println("El operador " + n1 + " no es válido para esta operación");
+				System.out.println("El operador " + n1 + " no es vï¿½lido para esta operaciï¿½n");
 			}
 			
 			if (n2 == 0)
 			{
-				System.out.println("El operador " + n2 + " no es válido para esta operación");
+				System.out.println("El operador " + n2 + " no es vï¿½lido para esta operaciï¿½n");
 			}
 		}
 		
@@ -84,7 +84,7 @@ public class Validacion
 	{
 		if (validarNumero(n1) && validarNumero(n2))
 		{
-			continuar = validarConfirmacion("máximo");
+			continuar = validarConfirmacion("mï¿½ximo");
 		}
 		
 		return continuar;
@@ -94,7 +94,7 @@ public class Validacion
 	{
 		if (validarNumero(n1) && validarNumero(n2))
 		{
-			validarConfirmacion("mínimo");
+			validarConfirmacion("mï¿½nimo");
 		}
 		
 		return continuar;
@@ -107,26 +107,26 @@ public class Validacion
 		{
 			if (n1 >= 1) 
 			{
-				continuar = validarConfirmacion("raíz");
+				continuar = validarConfirmacion("raï¿½z");
 			}
 			else
 			{
 				if (n1 < 0)
 				{
-					if ((n2 % 2 == 0) && (n2 % 10 == 0) && (n2 > 0))
+					if ((n2 % 2 != 0) && (n2 % 10 != 0) && (n2 > 0))
 					{
-						continuar = validarConfirmacion("raíz");
+						continuar = validarConfirmacion("raï¿½z");
 					}
 					else
 					{
-						System.out.println("Cuando el es negativa no se admiten índices negativos");
+						System.out.println("Cuando el es negativa no se admiten ï¿½ndices negativos");
 					}
 				}
 				else 
 				{
 					if (n1 == 0)
 					{
-						System.out.println("No se puede realizar la raíz");
+						System.out.println("No se puede realizar la raï¿½z");
 					}
 				}
 			}
@@ -140,7 +140,7 @@ public class Validacion
 		String confirmacion = " ";
 		boolean continuar = false;
 		
-		System.out.println("\nOperación a realizar: " + operacion);
+		System.out.println("\nOperaciï¿½n a realizar: " + operacion);
 		System.out.println("\nAceptar/Cancelar");
 		confirmacion = sc.nextLine();
 		
@@ -158,7 +158,7 @@ public class Validacion
 		return continuar;
 	}
 	
-	//Regex para validar el número introducido
+	//Regex para validar el nï¿½mero introducido
 	public static boolean validarNumero(float n)
 	{
 		boolean valido = false;
