@@ -32,6 +32,10 @@ public class Espectador {
 	}
 	
 	public void setEdad(int edad) {
+		if (edad<0) 
+		{
+			this.edad=0;
+		}
 		this.edad = edad;
 	}
 	

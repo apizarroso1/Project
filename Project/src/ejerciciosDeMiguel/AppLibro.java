@@ -3,7 +3,6 @@ package ejerciciosDeMiguel;
 import java.util.ArrayList;
 
 import daw.com.Teclado;
-
 public class AppLibro {
 
 	public static void main(String[] args) {

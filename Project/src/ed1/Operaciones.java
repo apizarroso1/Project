@@ -1,128 +1,177 @@
 package ed1;
 
-import java.util.Scanner;
-
-public class Operaciones {
+public class Operaciones 
+{
+	static boolean  continuar;
 	
-	
+	public static void sumar()
+	{	
+		float n1, n2, suma;
 		
-	
-	public static float sumar(){
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
+		continuar = Validacion.validarSuma(n1, n2);
 		
-		float suma = (num1 + num2);
-		
-		return suma;
-		
-	}
-	
-	public static float restar(){
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
-		
-		float resta = (num1 - num2);
-		return resta;
-		
-	}
-	
-	public static float multiplicar(){
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
-		
-		float producto = (num1 * num2);
-		return producto;
-	}
-	
-	public static float dividir(){
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
-		
-		float cociente = (num1/num2);
-		return cociente;
-		
-	}
-	
-	public static double potencia(){
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
-		
-		double resultado = Math.pow(num1, num2);
-		return resultado;
-	}
-	
-	public static float maximo(){
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
-		
-		float maximo;
-		
-		if (num1 > num2) {
-			 maximo = num1;
+		if (continuar)
+		{
+			suma = (n1 + n2);
+			
+			InterfazUsuario.escribirResultado(suma);
 		}
-		else {
-			 maximo = num2;
+	}
+	
+	public static void restar()
+	{
+		float n1, n2, resta;
+		
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
+		
+		continuar = Validacion.validarResta(n1, n2);
+		
+		if (continuar)
+		{
+			resta = (n1 - n2);
+			
+			InterfazUsuario.escribirResultado(resta);
+		}
+	}
+	
+	public static void multiplicar()
+	{
+		float n1, n2, producto;
+		
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
+		
+		continuar = Validacion.validarMultiplicacion(n1, n2);
+		
+		if (continuar)
+		{
+			producto = (n1 * n2);
+			
+			InterfazUsuario.escribirResultado(producto);
+		}
+	}
+	
+	public static void dividir()
+	{
+		float n1, n2, cociente;
+		
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
+		
+		continuar = Validacion.validacionDivision(n1, n2);
+		
+		if (continuar)
+		{
+			cociente = (n1 / n2);
+			
+			InterfazUsuario.escribirResultado(cociente);
 		}
 		
-		return maximo;
+	}
+	
+	public static void potencia()
+	{
+		float n1, n2, potencia;
+		
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
+	
+		continuar = Validacion.validarPotencia(n1, n2);
+		
+		if (continuar)
+		{
+			potencia = (float) Math.pow(n1, n2);
+			
+			InterfazUsuario.escribirResultado(potencia);
+		}
 		
 	}
 	
-	public static float minimo(){
+	public static void maximo()
+	{
+		float n1, n2, maximo;
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
 		
-		float minimo;
+		continuar = Validacion.validarMaximo(n1, n2);
 		
-		if (num1 < num2) {
-			minimo = num1;
+		if (continuar)
+		{
+			if (n1 != n2)
+			{
+				if (n1 > n2) 
+				{
+					maximo = n1;
+					
+					InterfazUsuario.escribirResultado(maximo);
+				}
+				else 
+				{
+					maximo = n2;
+					
+					InterfazUsuario.escribirResultado(maximo);
+				}
+			}
+			else
+			{
+				System.out.println("Los números son iguales");
+			}
 		}
-		else {
-			minimo = num2;
-		}
-		
-		return minimo;
-		
 	}
 	
-	public static void raiz(){
+	public static void minimo()
+	{
+	float n1, n2, minimo;
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Introduzca el primer operador");
-		Float num1 = sc.nextFloat();
-		System.out.println("Introduzca el segundo operador");
-		Float num2 = sc.nextFloat();
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
 		
-		float resultado = Math.
+		continuar = Validacion.validarMinimo(n1, n2);
 		
+		if (continuar)
+		{
+			if (n1 != n2)
+			{
+				if (n1 < n2) 
+				{
+					minimo = n1;
+					
+					InterfazUsuario.escribirResultado(minimo);
+				}
+				else 
+				{
+					minimo = n2;
+					
+					InterfazUsuario.escribirResultado(minimo);
+				}
+			}
+			else
+			{
+				System.out.println("Los números son iguales");
+			}
+		}
+	}
+	
+	public static void raiz()
+	{
+		float n1, n2, raiz;
+		
+		n1 = InterfazUsuario.leerNumero();
+		n2 = InterfazUsuario.leerNumero();
+		
+		continuar = Validacion.validarRaiz(n1, n2);
+		
+		if (continuar)
+		{
+			n2 = (float) Math.pow(n2, -1);
+			raiz = (float) Math.pow(n1, n2);
+			
+			InterfazUsuario.escribirResultado(raiz);
+		}
 	}
 }
-

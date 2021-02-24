@@ -16,6 +16,7 @@ public class Cine {
 	public Cine(float precioEntrada, Espectador[][] butacas, Pelicula pelicula) {
 	
 		setPrecioEntrada (precioEntrada);
+		
 		this.butacas = new Espectador [butacas.length][];
 		for (int i = 0; i < butacas[i].length; i++)
 			this.butacas[i] = new Espectador[butacas[i].length];
