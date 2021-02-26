@@ -11,30 +11,19 @@ public class Libro
 	private static String titulo;
 	private static String materia;
 	private static int cantEjemplares;
-	private static int codLibro;
 	private static ArrayList<Libro> libros = new ArrayList<Libro>();
 	
-	public Libro (String autor, String titulo, String materia, int cantEjemplares, int codLibro)
+	public Libro (String autor, String titulo, String materia, int cantEjemplares)
 	{
 		this.autor = autor;
 		this.titulo = titulo;
 		this.materia = materia;
 		this.cantEjemplares = cantEjemplares;
-		this.codLibro = crearCodigoLibro();
 	}
 	
 	public Libro ()
 	{
-		this ( " ", " ", " ", 0, "0");
-	}
-
-	public static int crearCodigoLibro() 
-	{
-		int codLibro = 0;
-		
-		
-		
-		return codLibro;
+		this ( " ", " ", " ", 0);
 	}
 	
 	public void leerDatos()
@@ -52,8 +41,6 @@ public class Libro
 		
 		System.out.println("Cantidad");
 		this.cantEjemplares = sc.nextInt();
-			
-		this.codLibro = crearCodigoLibro();
 		
 	}
 	
@@ -64,7 +51,7 @@ public class Libro
 		
 		if (libros.contains(l))
 		{
-			System.out.println("El libro ya está en el sistema");
+			System.out.println("El libro ya estï¿½ en el sistema");
 		}
 		else
 		{
@@ -75,7 +62,7 @@ public class Libro
 	@Override
 	public String toString() {
 		return "Libro [autor=" + autor + ", titulo=" + titulo + ", materia=" + materia + ", cantEjemplares="
-				+ cantEjemplares + ", codLibro=" + codLibro + "]";
+				+ cantEjemplares + ", codLibro=" + "]";
 	}
 	
 	public String mostrarLibro()
