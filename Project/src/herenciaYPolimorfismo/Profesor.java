@@ -17,7 +17,7 @@ public class Profesor extends Empleado
 	
 	public Profesor ()
 	{
-		this (" ", 0, leerDni(), " ", 0);
+		this (" ", 0, "1", " ", 0);
 	}
 
 	public String getTitulacion() 
@@ -47,20 +47,20 @@ public class Profesor extends Empleado
 	public void leerDatos()
 	{
 		super.leerDatos();
-		titulacion = Teclado.leerString("\nTitulaciÃ³n");
+		titulacion = Teclado.leerString("\nTitulación");
 		publicaciones = Teclado.leerInt("\nPublicaciones");
 	}
 	
-	public int calcularSueldo(int SUELDOBASE, int publicaciones, int antiguedad)
+	public int calcularSueldo()
 	{
-		int sueldo = SUELDOBASE;
-		int aux = antiguedad;
+		int sueldo = this.SUELDOBASE;
+		int aux = super.getAntiguedad();
 		int trienio = 0;
 		int bonus = 100;
 		
 		if (publicaciones > 0)
 		{
-			sueldo = (sueldo + bonus * publicaciones);
+			sueldo = (sueldo + bonus * this.publicaciones);
 		}
 		
 		do

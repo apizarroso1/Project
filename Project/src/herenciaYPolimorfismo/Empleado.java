@@ -2,22 +2,22 @@ package herenciaYPolimorfismo;
 
 import daw.com.Teclado;
 
-public class Empleado 
+public abstract class Empleado 
 {
 	private String nombre;
 	private int antiguedad;
-	private String dni;
+	private static String dni;
 	
 	public Empleado()
 	{
-		this (" ", 0, "11111111A");
+		this (" ", 0, "1");
 	}
 	
 	public Empleado(String nombre, int antiguedad, String dni) 
 	{
-		this.nombre = Teclado.leerString("Introduzca el nombre del empleado");
-		this.antiguedad = Teclado.leerInt("Introduzca la antigüedad del empleado");
-		this.dni = leerDni();
+		this.nombre = nombre;
+		this.antiguedad = antiguedad;
+		this.dni = "1";
 	}
 	
 	public Empleado (String nombre, int antiguedad)
@@ -27,8 +27,10 @@ public class Empleado
 
 	public static String leerDni() 
 	{
-		String dni = Teclado.leerString("Introduzca el dni del empleado");
-		if (dni.equals(dni));
+		do {
+			String dni = Teclado.leerString("\nDni");
+		} while (dni.equals(" "));
+		
 		return dni;
 	}
 
@@ -66,17 +68,24 @@ public class Empleado
 		this.dni = dni;
 	}
 	
-	public void leerDatos ()
+	public void leerDatos()
 	{
 		nombre = Teclado.leerString("\nNombre");
 		dni = leerDni();
 		antiguedad = Teclado.leerInt("\nAntiguedad");
 	}
 	
+	abstract public int calcularSueldo();
 	@Override
 	public boolean equals(Object obj) 
 	{
 		Empleado other = (Empleado) obj;
 		return this.dni.equals(other.dni);
 	}
+	
+	public static void mostrarDatos()
+	{
+		
+	}
+	
 }

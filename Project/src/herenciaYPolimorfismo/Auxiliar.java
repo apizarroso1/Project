@@ -15,7 +15,7 @@ public class Auxiliar extends Empleado
 	
 	public Auxiliar ()
 	{
-		this(" ", 0, leerDni(), false);
+		this(" ", 0, "1", false);
 	}
 
 	public boolean isIngles() 
@@ -31,20 +31,20 @@ public class Auxiliar extends Empleado
 	public void leerDatos()
 	{
 		super.leerDatos();
-		if (Teclado.leerString("\nInglÃ©s (s/n)").contentEquals("s"))
+		if (Teclado.leerString("\nInglés (s/n)").contentEquals("s"))
 		{
 			ingles = true;
 		}
 	}
 	
-	public static int calcularSueldo(int SUELDOBASE, boolean ingles, int antiguedad)
+	public int calcularSueldo()
 	{
-		int sueldo = SUELDOBASE;
+		int sueldo = this.SUELDOBASE;
 		int bonus = 0;
-		int aux = antiguedad;
+		int aux = super.getAntiguedad();
 		int trienio = 0;
 		
-		if (ingles)
+		if (this.ingles)
 		{
 			bonus = 400;
 		}

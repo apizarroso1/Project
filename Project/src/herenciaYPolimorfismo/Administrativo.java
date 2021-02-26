@@ -6,7 +6,7 @@ public class Administrativo extends Empleado
 {
 	private String categoria;
 	private String destino;
-	private final int SUELDOBASE = 1200;
+	private final static int SUELDOBASE = 1200;
 	
 	public Administrativo (String nombre, int antiguedad, String dni, String categoria, String destino)
 	{
@@ -17,7 +17,7 @@ public class Administrativo extends Empleado
 	
 	public Administrativo ()
 	{
-		this (" ", 0, leerDni(), " ", " ");
+		this (" ", 0, "1", " ", " ");
 	}
 
 	public String getCategoria() {
@@ -39,18 +39,18 @@ public class Administrativo extends Empleado
 	public void leerDatos()
 	{
 		super.leerDatos();
-		categoria = Teclado.leerString("\nCategorÃ­a");
+		categoria = Teclado.leerString("\nCategoría");
 		destino = Teclado.leerString("\nDestino");
 	}
 	
-	public int calcularSueldo(int SUELDOBASE, String categoria, int antiguedad)
+	public int calcularSueldo ()
 	{
-		int sueldo = SUELDOBASE;
+		int sueldo = this.SUELDOBASE;
 		int bonus = 0;
-		int aux = antiguedad;
+		int aux = super.getAntiguedad();
 		int trienio = 0;
 		
-		if (categoria.equalsIgnoreCase("oficial"))
+		if (this.categoria.equalsIgnoreCase("oficial"))
 		{
 			bonus = 400;
 		}
