@@ -3,60 +3,111 @@ package biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import herenciaYPolimorfismo.Empleado;
+public class Libro {
 
-public class Libro 
-{
-	private static String autor;
-	private static String titulo;
-	private static String materia;
-	private static int cantEjemplares;
-	private static ArrayList<Libro> libros = new ArrayList<Libro>();
-	
-	public Libro (String autor, String titulo, String materia, int cantEjemplares)
-	{
+	// Atributos de la clase libro, necesarios para la creación del objeto Libro
+	private String autor;
+	private String titulo;
+	private String materia;
+	private int cantEjemplares;
+	private boolean baja;
+
+	// Constructor mediante parámetros
+	public Libro(String autor, String titulo, String materia, int cantEjemplares, boolean baja) {
 		this.autor = autor;
 		this.titulo = titulo;
+		this.materia = null;
+		this.cantEjemplares = cantEjemplares;
+		this.baja = baja;
+	}
+
+	// Constructor por defecto
+	public Libro() {
+		this(" ", " ", " ", 0, true);
+	}
+
+	// Métodos getters y setters
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getMateria() {
+		return materia;
+	}
+
+	public void setMateria(String materia) {
 		this.materia = materia;
+	}
+
+	public int getCantEjemplares() {
+		return cantEjemplares;
+	}
+
+	public void setCantEjemplares(int cantEjemplares) {
 		this.cantEjemplares = cantEjemplares;
 	}
-	
-	public Libro ()
-	{
-		this ( " ", " ", " ", 0);
+
+	public boolean isBaja() {
+		return baja;
 	}
-	
-	public void leerDatos()
-	{
+
+	public void setBaja(boolean baja) {
+		this.baja = baja;
+	}
+
+	// Función para recibir datos de teclado
+	public void leerDatos(ArrayList<Materia> materias) {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Autor");
-		this.autor = sc.nextLine();
-		
-		System.out.println("Titulo");
-		this.titulo = sc.nextLine();
-		
-		System.out.println("Materia");
-		this.materia = sc.nextLine();
-		
-		System.out.println("Cantidad");
-		this.cantEjemplares = sc.nextInt();
-		
+		if (leerMateria(materias)) {
+			System.out.println("Autor");
+			this.autor = sc.nextLine();
+
+			System.out.println("Titulo");
+			this.titulo = sc.nextLine();
+
+			System.out.println("Cantidad");
+			this.cantEjemplares = sc.nextInt();
+
+		}
+
 	}
-	
-	public static void altaLibro() 
-	{
-		Libro l = new Libro();
-		l.leerDatos();
-		
-		if (libros.contains(l))
-		{
-			System.out.println("El libro ya estï¿½ en el sistema");
+
+	// Compruebo que la materia a la que se asigna el libro se encuentra dentro del
+	// arraylist de materias, en caso de que no, no permite registrar el libro
+	public boolean leerMateria(ArrayList<Materia> materias) {
+		Scanner sc = new Scanner(System.in);
+		boolean exito = false;
+
+		GestionMaterias.mostrarMaterias(materias);
+
+		System.out.println("Materia");
+		String materia = sc.nextLine();
+
+		if (materias.contains(materia)) {
+			this.materia = materia;
+
+			exito = true;
+
+		} else {
+			System.out.println("\nLa materia no existe en la lista de materias");
+
+			Validacion.solicitarIntro();
 		}
-		else
-		{
-			libros.add(l);	
-		}
+
+		return exito;
 	}
 
 	@Override
@@ -64,9 +115,8 @@ public class Libro
 		return "Libro [autor=" + autor + ", titulo=" + titulo + ", materia=" + materia + ", cantEjemplares="
 				+ cantEjemplares + ", codLibro=" + "]";
 	}
-	
-	public String mostrarLibro()
-	{
-		return "\n" + this.toString();
+
+	public String mostrarLibro() {
+		return "\n" + toString();
 	}
 }
