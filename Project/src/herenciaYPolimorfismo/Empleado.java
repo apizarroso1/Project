@@ -76,16 +76,11 @@ public abstract class Empleado
 	}
 	
 	abstract public int calcularSueldo();
+	
 	@Override
 	public boolean equals(Object obj) 
 	{
 		Empleado other = (Empleado) obj;
 		return this.dni.equals(other.dni);
 	}
-	
-	public static void mostrarDatos()
-	{
-		
-	}
-	
 }
