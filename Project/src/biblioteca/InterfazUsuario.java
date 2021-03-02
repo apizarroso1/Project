@@ -18,14 +18,14 @@ public class InterfazUsuario {
 		sc.close();
 	}
 
-	public static void mostrarMenu(ArrayList<Libro> libros, ArrayList<Materia> materias) {
+	public static void mostrarMenu(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Lector> lectores) {
 		int seleccion = 0;
 		do {
-			// Menú principal
-			System.out.println("\n[1] Gestión de libros");
-			System.out.println("\n[2] Gestión de lectores");
-			System.out.println("\n[3] Gestión de préstamos");
-			System.out.println("\n[4] Búsquedas");
+			// Menï¿½ principal
+			System.out.println("\n[1] Gestiï¿½n de libros");
+			System.out.println("\n[2] Gestiï¿½n de lectores");
+			System.out.println("\n[3] Gestiï¿½n de prï¿½stamos");
+			System.out.println("\n[4] Bï¿½squedas");
 			System.out.println("\n[5] Salir");
 
 			seleccion = Validacion.leerNum();
@@ -35,19 +35,19 @@ public class InterfazUsuario {
 				GestionLibros.mostrarMenuLibros(libros, materias);
 				break;
 			case 2:
-				GestionLectores.mostrarMenuLectores();// Función que abrirá el menú de gestion de lectores
+				GestionLectores.mostrarMenuLectores(lectores);// Funciï¿½n que abrirï¿½ el menï¿½ de gestion de lectores
 				break;
 			case 3:
-				GestionPrestamos.mostrarMenuPrestamos();// Función que abrirá el menú de gestion de préstamos
+				GestionPrestamos.mostrarMenuPrestamos();// Funciï¿½n que abrirï¿½ el menï¿½ de gestion de prï¿½stamos
 				break;
 			case 4:
-				GestionBusquedas.mostrarMenuBusquedas();// Función que abrirá el menú de búsquedas
+				GestionBusquedas.mostrarMenuBusquedas();// Funciï¿½n que abrirï¿½ el menï¿½ de bï¿½squedas
 				break;
 			case 5:
 				mostrarFin();
 				break;
 			default:
-				System.out.println("\nSelección inválida");
+				System.out.println("\nSelecciï¿½n invï¿½lida");
 			}
 
 		} while (seleccion != 5);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GestionMaterias {
 
-	//Menú para la gestión de materias
+	//Menï¿½ para la gestiï¿½n de materias
 	public static void mostrarMenuMaterias(ArrayList<Materia> materias, ArrayList<Libro> libros) {
 		int seleccion = 0;
 		do {
@@ -26,14 +26,14 @@ public class GestionMaterias {
 				break;
 
 			default:
-				System.out.println("\nSelección inválida");
+				System.out.println("\nSelecciï¿½n invï¿½lida");
 			}
 
 		} while (seleccion != 8);
 	}
 
-	// Lee los datos de la materia y comprueba si ya está en el sistema, si lo está
-	// muestra error y envía de vuelta al menu 1.3, en el caso de que no estuviese
+	// Lee los datos de la materia y comprueba si ya estï¿½ en el sistema, si lo estï¿½
+	// muestra error y envï¿½a de vuelta al menu 1.3, en el caso de que no estuviese
 	// ya registrada la registra tomando las confirmaciones requeridas
 	public static void altaMaterias(ArrayList<Materia> materias) {
 		Materia materia = null;
@@ -48,13 +48,13 @@ public class GestionMaterias {
 			materia.mostrarMateria();
 
 			if (Validacion.validarRespuesta()) {
-				System.out.println("\nMateria añadida");
+				System.out.println("\nMateria aï¿½adida");
 
 				materias.add(materia);
 
 				Validacion.solicitarIntro();
 			} else {
-				System.out.println("\nHa vuelto al menú de materias");
+				System.out.println("\nHa vuelto al menï¿½ de materias");
 
 				Validacion.solicitarIntro();
 			}
@@ -127,7 +127,7 @@ public class GestionMaterias {
 	}
 
 	public static void salirMenuMaterias() {
-		System.out.println("\nHa abandonado el menú de gestión de libros");
+		System.out.println("\nHa abandonado el menï¿½ de gestiï¿½n de materias");
 
 		Validacion.solicitarIntro();
 	}
