@@ -43,25 +43,28 @@ public class GestionLectores {
 				salirMenuLectores();
 				break;
 			default:
-				System.out.println("\nSelecciï¿½n invï¿½lida");
+				System.out.println("\nSeleccion invalida");
 			}
 
 		} while (seleccion != 8);
 	}
 
 	public static void altaLectores(ArrayList<Lector> lectores) {
-		Lector l = null;
+		Lector l = new Lector();
 		boolean continuar = false;
+
 		l.leerDatos();
 
 		if (!lectores.contains(l)) {
-			System.out.println(l.mostrarDatos());
-			System.out.println("\nEl lector se añadira al sistema");
+
+			l.mostrarDatos();
+
+			System.out.println("\nEl lector se aniadira al sistema");
 
 			continuar = Validacion.validarRespuesta();
 
 			if (continuar) {
-				System.out.println("\nEl lector se ha añadido al sistema");
+				System.out.println("\nEl lector se ha aniadido al sistema");
 
 				lectores.add(l);
 
@@ -78,7 +81,7 @@ public class GestionLectores {
 
 		for (int i = 0; i < lectores.size(); i++) {
 			System.out.println(i);
-			System.out.println(lectores.get(i).mostrarDatos());
+			lectores.get(i).mostrarDatos();
 		}
 
 		lector = Validacion.leerInt("\nSeleccione el lector a dar de baja");
@@ -132,7 +135,7 @@ public class GestionLectores {
 			}
 		} else {
 
-			System.out.println("\nEl lector no está de baja");
+			System.out.println("\nEl lector no esta de baja");
 
 			System.out.println("\nVolviendo al menu de gestion de lectores");
 
@@ -179,4 +182,44 @@ public class GestionLectores {
 			Validacion.solicitarIntro();
 		}
 	}
+
+	public static void listarLectores(ArrayList<Lector> lectores) {
+		for (int i = 0; i < lectores.size(); i++) {
+			System.out.println("\n" + i);
+			lectores.get(i).mostrarDatos();
+		}
+		System.out.println("\nFin del listado de lectores");
+		Validacion.solicitarIntro();
+	}
+
+	public static void compactarLectores(ArrayList<Lector> lectores) {
+		for (int i = 0; i < lectores.size(); i++) {
+
+			if (lectores.get(i).isBaja()) {
+				lectores.remove(i);
+			}
+		}
+
+		System.out.println("\nFin de la compactaciÃ³n del sistema de lectores");
+	}
+
+	public static void buscarLector(ArrayList<Lector> lectores) {
+		String nombre = " ";
+		String apellido = " ";
+
+		nombre = Validacion.leerString("\nIntroduzca el nombre a buscar");
+		apellido = Validacion.leerString("\nIntroduzca el apellido a buscar");
+
+		for (int i = 0; i < lectores.size(); i++) {
+			if (lectores.get(i).getNombre().equalsIgnoreCase(nombre)
+					|| lectores.get(i).getApellidos().equalsIgnoreCase(apellido)) {
+				lectores.get(i).mostrarDatos();
+			}
+		}
+	}
+	
+	public static void salirMenuLectores() {
+		System.out.println("\nHa abandonado el menu de gestion de lectores");
+	}
+
 }

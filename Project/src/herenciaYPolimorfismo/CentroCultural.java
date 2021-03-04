@@ -1,6 +1,7 @@
 package herenciaYPolimorfismo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import daw.com.Pantalla;
 import daw.com.Teclado;
@@ -56,7 +57,7 @@ public class CentroCultural {
 	}
 
 	public static void insertarMaterial(ArrayList<Material> materiales) {
-		Material m = null;
+		Material m; //= null;
 		int tipo = Libreria.leerEntre(1, 2, "\n1 para disco y 2 para libro");
 
 		if (tipo == 1) {
@@ -87,7 +88,7 @@ public class CentroCultural {
 	}
 
 	public static void solicitarPrestamo(ArrayList<Cliente> clientes, ArrayList<Material> materiales,
-			ArrayList<Prestamo> prestamos) {
+		ArrayList<Prestamo> prestamos) {
 		boolean exito = false;
 		int cliente, material;
 		Prestamo p = new Prestamo();
@@ -110,12 +111,16 @@ public class CentroCultural {
 //		}
 
 		for (int i = 0; i < clientes.size(); i++) {
-			Pantalla.escribirString(clientes.get(i).mostrarDatos());
+			if (!clientes.get(i).isPrestamo()) {
+				Pantalla.escribirString(clientes.get(i).mostrarDatos());
+			}
 		}
 		cliente = Libreria.leerEntre(0, clientes.size(), "\nSeleccione el cliente que realizara el prestamo");
 
 		for (int i = 0; i < materiales.size(); i++) {
-			Pantalla.escribirString(materiales.get(i).mostrarDatos());
+			if (!materiales.get(i).isBaja()) {
+				Pantalla.escribirString(materiales.get(i).mostrarDatos());
+			}
 		}
 		material = Libreria.leerEntre(0, materiales.size(), "\nSeleccione el material a prestar");
 
@@ -202,5 +207,4 @@ public class CentroCultural {
 
 		return pos;
 	}
-
 }

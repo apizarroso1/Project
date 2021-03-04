@@ -12,7 +12,7 @@ public class Materia {
 		this.nombre = " ";
 	}
 	
-	//Constructor por parámetro
+	//Constructor por parametro
 	public Materia (String nombre)
 	{
 		this.nombre = nombre;
@@ -27,7 +27,7 @@ public class Materia {
 		this.nombre = nombre;
 	}
 	
-	//Función para la lectura del nombre de la materia
+	//Funcion para la lectura del nombre de la materia
 	public void leerDatos()
 	{
 		Scanner sc = new Scanner(System.in);
@@ -41,7 +41,7 @@ public class Materia {
 		return "Materia [nombre=" + nombre + "]";
 	}
 	
-	//Función para mostrar la materia con salto de línea
+	//Funcion para mostrar la materia con salto de linea
 	public String mostrarMateria() {
 		return "\n" + toString();
 	}

@@ -86,8 +86,8 @@ public class Lector {
 				+ ", telefono=" + telefono + ", baja=" + baja + "]";
 	}
 
-	public String mostrarDatos() {
-		return "\n" + toString();
+	public void mostrarDatos() {
+		System.out.println("\n" + toString());
 	}
 
 }

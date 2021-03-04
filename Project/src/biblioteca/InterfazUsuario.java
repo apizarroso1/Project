@@ -21,7 +21,7 @@ public class InterfazUsuario {
 	public static void mostrarMenu(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Lector> lectores, ArrayList<Baja> bajas) {
 		int seleccion = 0;
 		do {
-			// Men� principal
+			// Menu principal
 			System.out.println("\n[1] Gestion de libros");
 			System.out.println("\n[2] Gestion de lectores");
 			System.out.println("\n[3] Gestion de prestamos");

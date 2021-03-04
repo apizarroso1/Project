@@ -15,7 +15,7 @@ public class BibliotecaApp {
 		// Muestro un mensaje de incio sencillo, no conlleva otras acciones
 		InterfazUsuario.mostrarInicio();
 
-		// Muestro el men� principal con las opciones para acceder a los submenus o
+		// Muestro el menu principal con las opciones para acceder a los submenus o
 		// abandonar el programa
 		InterfazUsuario.mostrarMenu(libros, materias, lectores, bajas);
 

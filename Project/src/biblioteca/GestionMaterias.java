@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GestionMaterias {
 
-	//Men� para la gesti�n de materias
+	// Menu para la gestion de materias
 	public static void mostrarMenuMaterias(ArrayList<Materia> materias, ArrayList<Libro> libros) {
 		int seleccion = 0;
 		do {
@@ -26,38 +26,41 @@ public class GestionMaterias {
 				break;
 
 			default:
-				System.out.println("\nSelecci�n inv�lida");
+				System.out.println("\nSeleccion invalida");
 			}
 
-		} while (seleccion != 8);
+		} while (seleccion != 3);
 	}
 
-	// Lee los datos de la materia y comprueba si ya est� en el sistema, si lo est�
-	// muestra error y env�a de vuelta al menu 1.3, en el caso de que no estuviese
+	// Lee los datos de la materia y comprueba si ya esta en el sistema, si lo esta
+	// muestra error y envia de vuelta al menu 1.3, en el caso de que no estuviese
 	// ya registrada la registra tomando las confirmaciones requeridas
 	public static void altaMaterias(ArrayList<Materia> materias) {
-		Materia materia = null;
+		Materia materia = new Materia();
+		boolean continuar = false;
 
 		materia.leerDatos();
+		
+		if (!materias.contains(materia)) {
 
-		if (materias.contains(materia)) {
-			System.out.println("\nLa materia ya se encuentra en el sistema");
-			Validacion.solicitarIntro();
-		} else {
+			System.out.println(materia.mostrarMateria());
 
-			materia.mostrarMateria();
+			continuar = Validacion.validarRespuesta();
 
-			if (Validacion.validarRespuesta()) {
-				System.out.println("\nMateria a�adida");
+			if (continuar) {
+				System.out.println("\nMateria aniadida");
 
 				materias.add(materia);
 
 				Validacion.solicitarIntro();
 			} else {
-				System.out.println("\nHa vuelto al men� de materias");
+				System.out.println("\nHa vuelto al menu de materias");
 
 				Validacion.solicitarIntro();
 			}
+		} else {
+			System.out.println("\nLa materia ya se encuentra en el sistema");
+			Validacion.solicitarIntro();
 		}
 
 	}
@@ -72,10 +75,10 @@ public class GestionMaterias {
 		boolean existe = false, continuar = false;
 
 		for (int i = 0; i < materias.size(); i++) {
-			materias.get(i).mostrarMateria();
+			System.out.println(materias.get(i).mostrarMateria());
 		}
 
-		System.out.println("\nSeleccione la materia a eliminar");
+		System.out.println("\nSeleccione la materia a eliminar mediante su codigo");
 
 		do {
 
@@ -83,7 +86,7 @@ public class GestionMaterias {
 
 		} while ((m < materias.size() - 1) && (m > 0));
 
-		materias.get(m).mostrarMateria();
+		System.out.println(materias.get(m).mostrarMateria());
 
 		materia = materias.get(m).getNombre();
 
@@ -122,12 +125,12 @@ public class GestionMaterias {
 
 	public static void mostrarMaterias(ArrayList<Materia> materias) {
 		for (int i = 0; i < materias.size(); i++) {
-			materias.get(i).mostrarMateria();
+			System.out.println(materias.get(i).mostrarMateria());
 		}
 	}
 
 	public static void salirMenuMaterias() {
-		System.out.println("\nHa abandonado el men� de gesti�n de materias");
+		System.out.println("\nHa abandonado el menu de gestion de materias");
 
 		Validacion.solicitarIntro();
 	}

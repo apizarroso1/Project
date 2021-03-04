@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class Libro {
 
-	// Atributos de la clase libro, necesarios para la creación del objeto Libro
+	// Atributos de la clase libro, necesarios para la creacion del objeto Libro
 	private String autor;
 	private String titulo;
 	private String materia;
 	private int cantEjemplares;
 
-	// Constructor mediante parámetros
+	// Constructor mediante parametros
 	public Libro(String autor, String titulo, String materia, int cantEjemplares) {
 		this.autor = autor;
 		this.titulo = titulo;
@@ -24,7 +24,7 @@ public class Libro {
 		this(" ", " ", " ", 0);
 	}
 
-	// Métodos getters y setters
+	// Metodos getters y setters
 	public String getAutor() {
 		return autor;
 	}
@@ -57,7 +57,7 @@ public class Libro {
 		this.cantEjemplares = cantEjemplares;
 	}
 
-	// Función para recibir datos de teclado
+	// Funcion para recibir datos de teclado
 	public void leerDatos(ArrayList<Materia> materias) {
 		Scanner sc = new Scanner(System.in);
 
@@ -67,7 +67,9 @@ public class Libro {
 			this.titulo = Validacion.leerString("\nTitulo");
 
 			this.cantEjemplares = Validacion.leerInt("\nCantidad de ejemplares");
-
+		} else {
+			System.out.println("\nEl libro no se ha podido registrar");
+			Validacion.solicitarIntro();
 		}
 
 	}
@@ -75,22 +77,28 @@ public class Libro {
 	// Compruebo que la materia a la que se asigna el libro se encuentra dentro del
 	// arraylist de materias, en caso de que no, no permite registrar el libro
 	public boolean leerMateria(ArrayList<Materia> materias) {
+		
 		Scanner sc = new Scanner(System.in);
 		boolean exito = false;
+		String nombre;
+		Materia materia = new Materia();
 
 		GestionMaterias.mostrarMaterias(materias);
 
 		System.out.println("\nMateria");
-		String materia = sc.nextLine();
+		nombre = sc.nextLine();
+
+		materia.setNombre(nombre);
 
 		if (materias.contains(materia)) {
-			this.materia = materia;
+
+			this.materia = materia.getNombre();
 
 			exito = true;
 
 		} else {
 			System.out.println("\nLa materia no existe en la lista de materias");
-
+			
 			Validacion.solicitarIntro();
 		}
 
