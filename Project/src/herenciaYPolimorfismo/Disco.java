@@ -6,13 +6,13 @@ public class Disco extends Material {
 
 	private String discografica;
 
-	public Disco(String cod, String titulo, String autor, String discografica) {
-		super(cod, titulo, autor);
+	public Disco(String cod, String titulo, String autor, String discografica, boolean baja, int prestamos) {
+		super(cod, titulo, autor, baja, prestamos);
 		this.discografica = discografica;
 	}
 
 	public Disco() {
-		super("1", " ", " ");
+		super("1", " ", " ", false, 0);
 		this.discografica = " ";
 	}
 

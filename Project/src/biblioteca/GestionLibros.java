@@ -1,11 +1,12 @@
 package biblioteca;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GestionLibros {
-	
-	//Menu para la gestión de libros
-	public static void mostrarMenuLibros(ArrayList<Libro> libros, ArrayList<Materia> materias) {
+
+	// Menu para la gestión de libros
+	public static void mostrarMenuLibros(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Baja> bajas) {
 		int seleccion = 0;
 		do {
 			System.out.println("\n[1] Alta de libro");
@@ -21,22 +22,22 @@ public class GestionLibros {
 
 			switch (seleccion) {
 			case 1:
-				altaLibro(libros, materias);
+				altaLibro(libros, materias, bajas);
 				break;
 			case 2:
-				bajaLibro(libros);
+				bajaLibro(libros, bajas);
 				break;
 			case 3:
-				anularBajaLibro(libros);
+				anularBajaLibro(libros, bajas);
 				break;
 			case 4:
-				actualizarLibro(libros, materias);
+				actualizarLibro(libros, materias, bajas);
 				break;
 			case 5:
 				listarLibros(libros);
 				break;
 			case 6:
-				compactarRegistro(libros);
+				compactarRegistro(libros, bajas);
 				break;
 			case 7:
 				GestionMaterias.mostrarMenuMaterias(materias, libros);
@@ -53,33 +54,43 @@ public class GestionLibros {
 
 	// Funcion que permite introducir los datos de un libro en el sistema,
 	// comprobará si el libro existe ya en el sistema y pedirá una confirmación
-	public static void altaLibro(ArrayList<Libro> libros, ArrayList<Materia> materias) {
+	public static void altaLibro(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Baja> bajas) {
 		Libro l = new Libro();
+		Baja b = new Baja();
 		l.leerDatos(materias);
 
 		// Comprobación de si el libro ya está en el sistema
-		if (libros.contains(l)) {
-			System.out.println("\nEl libro ya está en el sistema");
-		} else {
+		if (!libros.contains(l)) {
 			// Impresión del libro
-			System.out.println(l.mostrarLibro());
+			System.out.println(l.mostrarDatos());
 			System.out.println("\nEl libro se añadirá al sistema");
 
 			// Solicitación de la validación
 			if (Validacion.validarRespuesta()) {
+
+				System.out.println("\nEl libro se ha añadido al sistema");
+
 				libros.add(l);
+				
+				b.setCantBajas(b.getCantBajas() + 1);
+				
+				b.setCodLibro(libros.indexOf(l));
+
+				Validacion.solicitarIntro();
 			}
+		} else {
+			System.out.println("\nEl libro ya está en el sistema");
 		}
 	}
 
 	// Función que marcará el libro seleccionado de entre los que se encuentran en
 	// el sistema como de baja, reduciendo su cantidad en uno
-	public static void bajaLibro(ArrayList<Libro> libros) {
-		int libro, n;
+	public static void bajaLibro(ArrayList<Libro> libros, ArrayList<Baja> bajas) {
+		int libro;
 
 		for (int i = 0; i < libros.size(); i++) {
-			System.out.println(libros.get(i).mostrarLibro());
 			System.out.println(i);
+			System.out.println(libros.get(i).mostrarDatos());
 		}
 
 		System.out.println("\nEscoja el libro a dar de baja");
@@ -94,21 +105,20 @@ public class GestionLibros {
 
 		if (Validacion.validarRespuesta()) {
 			System.out.println("\nEl libro se marcará como baja en el sistema");
-			libros.get(libro).setBaja(true);
+			
+			bajas.get(libros.indexOf(libro)).setCantBajas(bajas.get(libros.indexOf(libro)).getCantBajas() + 1);
 
-			n = libros.get(libro).getCantEjemplares();
-			n--;
-			libros.get(libro).setCantEjemplares(n);
+			libros.get(libro).setCantEjemplares(libros.get(libro).getCantEjemplares() - 1);
 		}
 	}
 
 	// Función que nos permitirá anular la baja en un libro, aumentando en uno su
 	// cantidad
-	public static void anularBajaLibro(ArrayList<Libro> libros) {
+	public static void anularBajaLibro(ArrayList<Libro> libros, ArrayList<Baja> bajas) {
 		int libro, n;
 
 		for (int i = 0; i < libros.size(); i++) {
-			System.out.println(libros.get(i).mostrarLibro());
+			System.out.println(libros.get(i).mostrarDatos());
 			System.out.println(i);
 		}
 
@@ -122,31 +132,29 @@ public class GestionLibros {
 
 		if (Validacion.validarRespuesta()) {
 			System.out.println("\nLa baja del libro se anulará en el sistema");
-			libros.get(libro).setBaja(false);
+			
+			bajas.get(libros.indexOf(libro)).setCantBajas(bajas.get(libros.indexOf(libro)).getCantBajas() - 1);
 
-			n = libros.get(libro).getCantEjemplares();
-			n++;
-			libros.get(libro).setCantEjemplares(n);
+			libros.get(libro).setCantEjemplares(libros.get(libro).getCantEjemplares() + 1);
 		}
 	}
 
-	public static void actualizarLibro(ArrayList<Libro> libros, ArrayList<Materia> materias) {
+	public static void actualizarLibro(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Baja> bajas) {
 		int libro;
 
 		// Mostrar todos los libros en el sistema
 		for (int i = 0; i < libros.size(); i++) {
-			System.out.println(libros.get(i).mostrarLibro());
+			System.out.println(libros.get(i).mostrarDatos());
 			System.out.println(i);
 		}
 
 		// Selección del libro a actualizar
-		System.out.println("\nEscoja el libro a actualizar");
-		libro = Validacion.leerNum();
+		libro = Validacion.leerInt("\nSeleccione el libro a actualizar");
 
 		// Comprobación de la existencia o estado de baja del libro, en cuyo caso se
 		// muestra un aviso
-		if ((libros.get(libro) != null) || (libros.get(libro).isBaja())) {
-			System.out.println("\nEl libro no se encuentra en el sistema o se encuentra de baja");
+		if ((libros.get(libro) != null) || (libros.get(libro).getCantEjemplares() == 0)) {
+			System.out.println("\nEl libro no se encuentra en el sistema o no se encuentran ejemplares sin dar de baja");
 
 			Validacion.solicitarIntro();
 
@@ -156,7 +164,7 @@ public class GestionLibros {
 			// validación
 			libros.get(libro).leerDatos(materias);
 
-			libros.get(libro).mostrarLibro();
+			libros.get(libro).mostrarDatos();
 
 			Validacion.validarRespuesta();
 		}
@@ -166,6 +174,7 @@ public class GestionLibros {
 		// Muestro todos los libros registrados si existe alguno, si no existiesen
 		// muestro aviso por pantalla, solicito intro y envío de vuelta a menu 1.2
 		if (libros.isEmpty()) {
+			
 			System.out.println("\nNo hay libros registrados");
 
 			Validacion.solicitarIntro();
@@ -173,7 +182,7 @@ public class GestionLibros {
 		} else {
 
 			for (int i = 0; i < libros.size(); i++) {
-				libros.get(i).mostrarLibro();
+				libros.get(i).mostrarDatos();
 
 				System.out.println("\nFin de la lista de libros");
 
@@ -182,7 +191,7 @@ public class GestionLibros {
 		}
 	}
 
-	public static void compactarRegistro(ArrayList<Libro> libros) {
+	public static void compactarRegistro(ArrayList<Libro> libros, ArrayList<Baja> bajas) {
 		// Compruebo si hay libros antes de comenzar, envió aviso de error y devuelvo al
 		// menu 1.2 y si hay libros en el sistema muestra los libros en baja para luego
 		// eliminarlos
@@ -192,11 +201,11 @@ public class GestionLibros {
 			Validacion.solicitarIntro();
 
 		} else {
-
-			for (int i = 0; i < libros.size(); i++) {
-				if (libros.get(i).isBaja()) {
-					libros.get(i).mostrarLibro();
-					libros.remove(i);
+			
+			for (int i = 0; i < bajas.size(); i++) {
+				if (bajas.get(i).getCantBajas() > 1) {
+					bajas.get(i).setCantBajas(0);
+					
 					System.out.println("\nFin del compactamiento del registro de libros");
 
 					Validacion.solicitarIntro();

@@ -68,7 +68,7 @@ public class CentroCultural {
 		}
 
 		if (materiales.contains(m)) {
-			Pantalla.escribirString("\nEl material ya está registrado");
+			Pantalla.escribirString("\nEl material ya esta registrado");
 		} else {
 			materiales.add(m);
 		}
@@ -80,7 +80,7 @@ public class CentroCultural {
 		c.leerDatos();
 
 		if (clientes.contains(c)) {
-			Pantalla.escribirString("\nEl cliente ya está registrado");
+			Pantalla.escribirString("\nEl cliente ya esta registrado");
 		} else {
 			clientes.add(c);
 		}
@@ -110,12 +110,12 @@ public class CentroCultural {
 //		}
 
 		for (int i = 0; i < clientes.size(); i++) {
-			clientes.get(i).mostrarDatos();
+			Pantalla.escribirString(clientes.get(i).mostrarDatos());
 		}
 		cliente = Libreria.leerEntre(0, clientes.size(), "\nSeleccione el cliente que realizara el prestamo");
 
 		for (int i = 0; i < materiales.size(); i++) {
-			materiales.get(i).mostrarDatos();
+			Pantalla.escribirString(materiales.get(i).mostrarDatos());
 		}
 		material = Libreria.leerEntre(0, materiales.size(), "\nSeleccione el material a prestar");
 
@@ -153,7 +153,7 @@ public class CentroCultural {
 		int prestamo, material, cliente;
 
 		for (int i = 0; i < prestamos.size(); i++) {
-			prestamos.get(i).mostrarDatos();
+			Pantalla.escribirString(prestamos.get(i).mostrarDatos());
 		}
 
 		prestamo = Libreria.leerEntre(0, prestamos.size(), "\nSeleccione el prestamo a finalizar");
@@ -175,16 +175,16 @@ public class CentroCultural {
 	public static void listarMateriales(ArrayList<Material> materiales) {
 		for (int i = 0; i < materiales.size(); i++) {
 			if (!materiales.get(i).isBaja()) {
-				materiales.get(i).mostrarDatos();
+				Pantalla.escribirString(materiales.get(i).mostrarDatos());
 			}
 		}
 	}
 
 	public static void mostrarMasPrestado(ArrayList<Material> materiales) {
-		
+
 		int pos = buscarMasPrestado(materiales);
-		
-		materiales.get(pos).mostrarDatos();
+
+		Pantalla.escribirString(materiales.get(pos).mostrarDatos());
 		Pantalla.escribirString(" es el mas prestado");
 	}
 

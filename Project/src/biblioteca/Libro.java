@@ -10,20 +10,18 @@ public class Libro {
 	private String titulo;
 	private String materia;
 	private int cantEjemplares;
-	private boolean baja;
 
 	// Constructor mediante parámetros
-	public Libro(String autor, String titulo, String materia, int cantEjemplares, boolean baja) {
+	public Libro(String autor, String titulo, String materia, int cantEjemplares) {
 		this.autor = autor;
 		this.titulo = titulo;
 		this.materia = null;
 		this.cantEjemplares = cantEjemplares;
-		this.baja = baja;
 	}
 
 	// Constructor por defecto
 	public Libro() {
-		this(" ", " ", " ", 0, true);
+		this(" ", " ", " ", 0);
 	}
 
 	// Métodos getters y setters
@@ -59,27 +57,16 @@ public class Libro {
 		this.cantEjemplares = cantEjemplares;
 	}
 
-	public boolean isBaja() {
-		return baja;
-	}
-
-	public void setBaja(boolean baja) {
-		this.baja = baja;
-	}
-
 	// Función para recibir datos de teclado
 	public void leerDatos(ArrayList<Materia> materias) {
 		Scanner sc = new Scanner(System.in);
 
 		if (leerMateria(materias)) {
-			System.out.println("Autor");
-			this.autor = sc.nextLine();
+			this.autor = Validacion.leerString("\nAutor");
 
-			System.out.println("Titulo");
-			this.titulo = sc.nextLine();
+			this.titulo = Validacion.leerString("\nTitulo");
 
-			System.out.println("Cantidad");
-			this.cantEjemplares = sc.nextInt();
+			this.cantEjemplares = Validacion.leerInt("\nCantidad de ejemplares");
 
 		}
 
@@ -93,7 +80,7 @@ public class Libro {
 
 		GestionMaterias.mostrarMaterias(materias);
 
-		System.out.println("Materia");
+		System.out.println("\nMateria");
 		String materia = sc.nextLine();
 
 		if (materias.contains(materia)) {
@@ -113,10 +100,10 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [autor=" + autor + ", titulo=" + titulo + ", materia=" + materia + ", cantEjemplares="
-				+ cantEjemplares + ", codLibro=" + "]";
+				+ cantEjemplares + "]";
 	}
 
-	public String mostrarLibro() {
+	public String mostrarDatos() {
 		return "\n" + toString();
 	}
 }

@@ -5,7 +5,7 @@ import daw.com.Teclado;
 public class Libro extends Material {
 	private int nPaginas;
 
-	public Libro(String cod, String titulo, String autor, int prestamos, int nPaginas) {
+	public Libro(String cod, String titulo, String autor, int prestamos, int nPaginas, boolean baja) {
 		super(cod, titulo, autor, baja, prestamos);
 		this.nPaginas = nPaginas;
 	}

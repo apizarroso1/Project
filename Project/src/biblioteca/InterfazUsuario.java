@@ -18,36 +18,36 @@ public class InterfazUsuario {
 		sc.close();
 	}
 
-	public static void mostrarMenu(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Lector> lectores) {
+	public static void mostrarMenu(ArrayList<Libro> libros, ArrayList<Materia> materias, ArrayList<Lector> lectores, ArrayList<Baja> bajas) {
 		int seleccion = 0;
 		do {
 			// Men� principal
-			System.out.println("\n[1] Gesti�n de libros");
-			System.out.println("\n[2] Gesti�n de lectores");
-			System.out.println("\n[3] Gesti�n de pr�stamos");
-			System.out.println("\n[4] B�squedas");
+			System.out.println("\n[1] Gestion de libros");
+			System.out.println("\n[2] Gestion de lectores");
+			System.out.println("\n[3] Gestion de prestamos");
+			System.out.println("\n[4] Busquedas");
 			System.out.println("\n[5] Salir");
 
 			seleccion = Validacion.leerNum();
 
 			switch (seleccion) {
 			case 1:
-				GestionLibros.mostrarMenuLibros(libros, materias);
+				GestionLibros.mostrarMenuLibros(libros, materias, bajas);
 				break;
 			case 2:
-				GestionLectores.mostrarMenuLectores(lectores);// Funci�n que abrir� el men� de gestion de lectores
+				GestionLectores.mostrarMenuLectores(lectores);// Funcion que abrira el menu de gestion de lectores
 				break;
 			case 3:
-				GestionPrestamos.mostrarMenuPrestamos();// Funci�n que abrir� el men� de gestion de pr�stamos
+				GestionPrestamos.mostrarMenuPrestamos();// Funcion que abrira el menu de gestion de prestamos
 				break;
 			case 4:
-				GestionBusquedas.mostrarMenuBusquedas();// Funci�n que abrir� el men� de b�squedas
+				GestionBusquedas.mostrarMenuBusquedas();// Funcion que abrira el menu de busquedas
 				break;
 			case 5:
 				mostrarFin();
 				break;
 			default:
-				System.out.println("\nSelecci�n inv�lida");
+				System.out.println("\nSeleccion invalida");
 			}
 
 		} while (seleccion != 5);

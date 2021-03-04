@@ -37,8 +37,28 @@ public class Validacion {
 	public static void solicitarIntro() {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("\nPulse espacio para continuar");
+		System.out.println("\nPulse intro para continuar");
 		sc.nextLine();
 
+	}
+	
+	public static String leerString(String mensaje) {
+		Scanner sc = new Scanner(System.in);
+		String string = " ";
+		
+		System.out.println(mensaje);
+		string = sc.nextLine();
+		
+		return string;
+	}
+	
+	public static int leerInt(String mensaje) {
+		Scanner sc = new Scanner(System.in);
+		int i = 0;
+		
+		System.out.println(mensaje);
+		i = sc.nextInt();
+		
+		return i;
 	}
 }

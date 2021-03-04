@@ -22,6 +22,10 @@ public abstract class Material {
 		this("1", " ", " ", false, 0);
 	}
 
+	public Material(Material o) {
+		this(o.cod, o.autor, o.titulo, o.baja, o.prestamos);
+	}
+
 	public int getPrestamos() {
 		return prestamos;
 	}
@@ -61,7 +65,7 @@ public abstract class Material {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	
+
 	public void leerDatos() {
 		this.autor = Teclado.leerString("\nAutor");
 		this.titulo = Teclado.leerString("\nTitulo");
@@ -72,6 +76,8 @@ public abstract class Material {
 	public String toString() {
 		return "Material [cod=" + cod + ", titulo=" + titulo + ", autor=" + autor + "]";
 	}
-	
-	public abstract void mostrarDatos();
+
+	public String mostrarDatos() {
+		return "\n" + toString();
+	}
 }
