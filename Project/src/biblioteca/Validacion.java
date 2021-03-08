@@ -11,13 +11,13 @@ public class Validacion {
 
 		return num;
 	}
-	
+
 	// Funcion para leer la opcion de los menus
 	public static String leerOpcion() {
 		Scanner sc = new Scanner(System.in);
-		
+
 		String c = sc.nextLine();
-		
+
 		return c;
 	}
 
@@ -53,24 +53,26 @@ public class Validacion {
 		sc.nextLine();
 
 	}
-	
+
+	// Funcion para leer un String enviando un mensaje
 	public static String leerString(String mensaje) {
 		Scanner sc = new Scanner(System.in);
 		String string = " ";
-		
+
 		System.out.println(mensaje);
 		string = sc.nextLine();
-		
+
 		return string;
 	}
-	
+
+	// Funcion para leer un entero enviando un mensaje
 	public static int leerInt(String mensaje) {
 		Scanner sc = new Scanner(System.in);
 		int i = 0;
-		
+
 		System.out.println(mensaje);
 		i = sc.nextInt();
-		
+
 		return i;
 	}
 }

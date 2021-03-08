@@ -40,6 +40,8 @@ public class GestionPrestamos {
 		} while (!seleccion.equals("5"));
 	}
 
+	// Funcion que crea un objeto prestamo que si se confirma y todos los datos
+	// introducidos son correctos sera aniadido al ArrayList de prestamos
 	public static void anotarPrestamo(ArrayList<Libro> libros, ArrayList<Lector> lectores,
 			ArrayList<Prestamo> prestamos) {
 		boolean continuar = false;
@@ -84,6 +86,9 @@ public class GestionPrestamos {
 		}
 	}
 
+	// Funcion que si recibe los datos correctos de la devolucion del prestamo,
+	// marcara el prestamo en el ArrayList de prestamos como devuelto y devolvera el
+	// ejemplar del libro a su objeto original en el ArrayList de libros
 	public static void anotarDevolucion(ArrayList<Prestamo> prestamos) {
 		int prestamo;
 		boolean continuar = false;
@@ -120,6 +125,7 @@ public class GestionPrestamos {
 		}
 	}
 
+	// Funcion que lista los libros sin devolver
 	public static void listarMorosos(ArrayList<Prestamo> prestamos) {
 
 		mostrarTodosPrestamosSinDevolver(prestamos);
@@ -129,6 +135,7 @@ public class GestionPrestamos {
 		Validacion.solicitarIntro();
 	}
 
+	// Funcion que permite buscar los prestamos de un lector a elegir
 	public static void buscarPrestamosLector(ArrayList<Prestamo> prestamos) {
 		int lector;
 		boolean continuar;
@@ -164,6 +171,7 @@ public class GestionPrestamos {
 		}
 	}
 
+	// Funcion que muestra todos los prestamos sin devolver
 	public static void mostrarTodosPrestamosSinDevolver(ArrayList<Prestamo> prestamos) {
 		for (Prestamo p : prestamos) {
 			if (!p.isDevuelto()) {
@@ -172,7 +180,7 @@ public class GestionPrestamos {
 			}
 		}
 	}
-	
+
 	public static void salirMenuPrestamos() {
 		System.out.println("\nHa abandonado el menu de gestion de prestamos");
 	}

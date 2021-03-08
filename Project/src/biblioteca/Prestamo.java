@@ -7,16 +7,16 @@ public class Prestamo {
 	public Libro libro;
 	public Lector lector;
 	public boolean devuelto = false;
-	
+
 	public Prestamo(LocalDate fecha, Libro libro, Lector lector, boolean devuelto) {
 		this.fecha = fecha;
 		this.libro = libro;
 		this.lector = lector;
 		this.devuelto = devuelto;
 	}
-	
+
 	public Prestamo() {
-		this (null, null, null, false);
+		this(null, null, null, false);
 	}
 
 	public LocalDate getFecha() {
@@ -50,7 +50,8 @@ public class Prestamo {
 	public void setDevuelto(boolean devuelto) {
 		this.devuelto = devuelto;
 	}
-	
+
+	// Funcion que mostrara solo el titulo y el autor de un libro
 	public void mostrarLibroAbreviado() {
 		System.out.println("\n" + this.libro.getTitulo());
 		System.out.println("\n" + this.libro.getAutor());
@@ -60,11 +61,9 @@ public class Prestamo {
 	public String toString() {
 		return "Prestamo [fecha=" + fecha + ", libro=" + libro + ", lector=" + lector + ", devuelto=" + devuelto + "]";
 	}
-	
+
 	public void mostrarDatos() {
 		System.out.println("\n" + toString());
 	}
-
-	
 
 }
