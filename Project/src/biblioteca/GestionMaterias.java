@@ -6,22 +6,22 @@ public class GestionMaterias {
 
 	// Menu para la gestion de materias
 	public static void mostrarMenuMaterias(ArrayList<Materia> materias, ArrayList<Libro> libros) {
-		int seleccion = 0;
+		String seleccion = "0";
 		do {
 			System.out.println("\n[1] Alta de Materia");
 			System.out.println("\n[2] Baja de Materia");
 			System.out.println("\n[3] Salir");
 
-			seleccion = Validacion.leerNum();
+			seleccion = Validacion.leerOpcion();
 
 			switch (seleccion) {
-			case 1:
+			case "1":
 				altaMaterias(materias);
 				break;
-			case 2:
+			case "2":
 				bajaMaterias(materias, libros);
 				break;
-			case 3:
+			case "3":
 				salirMenuMaterias();
 				break;
 
@@ -29,7 +29,7 @@ public class GestionMaterias {
 				System.out.println("\nSeleccion invalida");
 			}
 
-		} while (seleccion != 3);
+		} while (!seleccion.equals("3"));
 	}
 
 	// Lee los datos de la materia y comprueba si ya esta en el sistema, si lo esta
@@ -40,7 +40,7 @@ public class GestionMaterias {
 		boolean continuar = false;
 
 		materia.leerDatos();
-		
+
 		if (!materias.contains(materia)) {
 
 			System.out.println(materia.mostrarMateria());
@@ -75,7 +75,7 @@ public class GestionMaterias {
 		boolean existe = false, continuar = false;
 
 		for (int i = 0; i < materias.size(); i++) {
-			System.out.println(materias.get(i).mostrarMateria());
+			System.out.println(materias.get(i).mostrarMateria() + (i + 1));
 		}
 
 		System.out.println("\nSeleccione la materia a eliminar mediante su codigo");
@@ -85,6 +85,8 @@ public class GestionMaterias {
 			m = Validacion.leerNum();
 
 		} while ((m < materias.size() - 1) && (m > 0));
+
+		m--;
 
 		System.out.println(materias.get(m).mostrarMateria());
 
@@ -116,7 +118,6 @@ public class GestionMaterias {
 			if (Validacion.validarRespuesta()) {
 				materias.remove(m);
 
-				Validacion.solicitarIntro();
 			} else {
 				Validacion.solicitarIntro();
 			}
@@ -124,8 +125,8 @@ public class GestionMaterias {
 	}
 
 	public static void mostrarMaterias(ArrayList<Materia> materias) {
-		for (int i = 0; i < materias.size(); i++) {
-			System.out.println(materias.get(i).mostrarMateria());
+		for (Materia m : materias) {
+			System.out.println(m.mostrarMateria());
 		}
 	}
 

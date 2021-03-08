@@ -90,4 +90,11 @@ public class Lector {
 		System.out.println("\n" + toString());
 	}
 
+	// Equals que compara lectores por su dni
+	@Override
+	public boolean equals(Object obj) {
+		Lector other = (Lector) obj;
+		return this.dni.equals(other.dni);
+	}
+
 }

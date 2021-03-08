@@ -35,6 +35,13 @@ public class Materia {
 		
 		this.nombre = sc.nextLine();
 	}
+	
+	@Override
+	public boolean equals(Object obj) 
+	{
+		Materia other = (Materia) obj;
+		return this.nombre.equals(other.nombre);
+	}
 
 	@Override
 	public String toString() {

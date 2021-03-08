@@ -2,6 +2,7 @@ package biblioteca;
 
 import java.util.Scanner;
 
+// Funcion para leer un numero entero
 public class Validacion {
 	public static int leerNum() {
 		Scanner sc = new Scanner(System.in);
@@ -10,14 +11,24 @@ public class Validacion {
 
 		return num;
 	}
+	
+	// Funcion para leer la opcion de los menus
+	public static String leerOpcion() {
+		Scanner sc = new Scanner(System.in);
+		
+		String c = sc.nextLine();
+		
+		return c;
+	}
 
+	// Funcion que solicitara una confirmacion para continuar
 	public static boolean validarRespuesta() {
 		Scanner sc = new Scanner(System.in);
 		String respuesta;
 		boolean confirmacion = false;
 
 		do {
-			System.out.println("\nConfirme la operación: ");
+			System.out.println("\nConfirme la operación: (s/n) ");
 			respuesta = sc.nextLine();
 		} while (respuesta.equalsIgnoreCase(" "));
 
@@ -34,6 +45,7 @@ public class Validacion {
 		return confirmacion;
 	}
 
+	// Funcion para solicitar intro
 	public static void solicitarIntro() {
 		Scanner sc = new Scanner(System.in);
 

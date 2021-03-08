@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Libro {
 
-	// Atributos de la clase libro, necesarios para la creacion del objeto Libro
+	// Atributos de la clase libro
 	private String autor;
 	private String titulo;
 	private String materia;
@@ -19,12 +19,10 @@ public class Libro {
 		this.cantEjemplares = cantEjemplares;
 	}
 
-	// Constructor por defecto
 	public Libro() {
 		this(" ", " ", " ", 0);
 	}
 
-	// Metodos getters y setters
 	public String getAutor() {
 		return autor;
 	}
@@ -58,26 +56,40 @@ public class Libro {
 	}
 
 	// Funcion para recibir datos de teclado
-	public void leerDatos(ArrayList<Materia> materias) {
+	public boolean leerDatos(ArrayList<Materia> materias) {
 		Scanner sc = new Scanner(System.in);
+		boolean exito = false;
 
-		if (leerMateria(materias)) {
-			this.autor = Validacion.leerString("\nAutor");
+		// Compruebo si el ArrayList esta vacio
+		if (!(materias == null || materias.size() == 0)) {
 
-			this.titulo = Validacion.leerString("\nTitulo");
+			if (leerMateria(materias)) {
+				this.autor = Validacion.leerString("\nAutor");
 
-			this.cantEjemplares = Validacion.leerInt("\nCantidad de ejemplares");
+				this.titulo = Validacion.leerString("\nTitulo");
+
+				this.cantEjemplares = Validacion.leerInt("\nCantidad de ejemplares");
+
+				exito = true;
+
+			} else {
+				Validacion.solicitarIntro();
+			}
+
 		} else {
-			System.out.println("\nEl libro no se ha podido registrar");
-			Validacion.solicitarIntro();
+
+			System.out.println("\nNo hay materias registradas");
+
 		}
+
+		return exito;
 
 	}
 
 	// Compruebo que la materia a la que se asigna el libro se encuentra dentro del
 	// arraylist de materias, en caso de que no, no permite registrar el libro
 	public boolean leerMateria(ArrayList<Materia> materias) {
-		
+
 		Scanner sc = new Scanner(System.in);
 		boolean exito = false;
 		String nombre;
@@ -98,7 +110,7 @@ public class Libro {
 
 		} else {
 			System.out.println("\nLa materia no existe en la lista de materias");
-			
+
 			Validacion.solicitarIntro();
 		}
 
