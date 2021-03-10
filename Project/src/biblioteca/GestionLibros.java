@@ -82,45 +82,48 @@ public class GestionLibros {
 	// Funcion que marcara el libro seleccionado de entre los que se encuentran en
 	// el sistema como de baja, reduciendo su cantidad en uno
 	public static void bajaLibro(ArrayList<Libro> libros, ArrayList<Libro> bajas) {
-		int libro, cant, cant2;
+		int libro = 0, cant, cant2;
 		Libro aux;
 
-		mostrarTodosLibros(libros);
+		if (libros.size() != 0) {
+			mostrarTodosLibros(libros);
 
-		System.out.println("\nEscoja el libro a dar de baja");
+			// Para evitar error por introducir un numero que exceda o no llegue al tamanio
+			// del arralist
+			do {
 
-		// Para evitar error por introducir un numero que exceda o no llegue al tamanio
-		// del arralist
-		do {
+				libro = Validacion.leerInt("\nSeleccione el libro a dar de baja mediante su codigo");
 
-			libro = Validacion.leerNum();
+				libro--;
 
-			libro--;
+			} while ((libro < libros.size() - 1) && (libro > 0));
 
-		} while ((libro < libros.size() - 1) && (libro > 0));
+			if (Validacion.validarRespuesta()) {
+				System.out.println("\nEl libro se marcara como baja en el sistema");
 
-		if (Validacion.validarRespuesta()) {
-			System.out.println("\nEl libro se marcara como baja en el sistema");
+				aux = libros.get(libro);
 
-			aux = libros.get(libro);
+				if (bajas.contains(aux)) {
 
-			if (bajas.contains(aux)) {
+					cant = aux.getCantEjemplares();
 
-				cant = aux.getCantEjemplares();
+					aux.setCantEjemplares(cant++);
 
-				aux.setCantEjemplares(cant++);
+				} else {
+					aux.setCantEjemplares(1);
+				}
 
-			} else {
-				aux.setCantEjemplares(1);
+				bajas.add(aux);
+
+				cant2 = libros.get(libro).getCantEjemplares();
+				cant2--;
+
+				libros.get(libro).setCantEjemplares(cant2);
 			}
-
-			bajas.add(aux);
-
-			cant2 = libros.get(libro).getCantEjemplares();
-			cant2--;
-
-			libros.get(libro).setCantEjemplares(cant2);
+		} else {
+			System.out.println("\nNo existe ningun libro en el registro");
 		}
+
 	}
 
 	// Funcion que nos permitira anular la baja en un libro, aumentando en uno su
@@ -133,22 +136,24 @@ public class GestionLibros {
 			System.out.println(bajas.indexOf(l));
 		}
 
-		System.out.println("\nEscoja el libro al cual anular la baja");
+		if (bajas.size() != 0) {
+			System.out.println("\nEscoja el libro al cual anular la baja");
 
-		do {
+			do {
 
-			libro = Validacion.leerNum();
+				libro = Validacion.leerNum();
 
-			libro--;
+				libro--;
 
-		} while ((libro < libros.size() - 1) && (libro > 0));
+			} while ((libro < libros.size() - 1) && (libro > 0));
 
-		if (Validacion.validarRespuesta()) {
-			System.out.println("\nLa baja del libro se anulara en el sistema");
+			if (Validacion.validarRespuesta()) {
+				System.out.println("\nLa baja del libro se anulara en el sistema");
 
-			bajas.get(libro).setCantEjemplares(bajas.get(libro).getCantEjemplares() - 1);
+				bajas.get(libro).setCantEjemplares(bajas.get(libro).getCantEjemplares() - 1);
 
-			libros.get(libro).setCantEjemplares(libros.get(libro).getCantEjemplares() + 1);
+				libros.get(libro).setCantEjemplares(libros.get(libro).getCantEjemplares() + 1);
+			}
 		}
 	}
 
@@ -158,25 +163,30 @@ public class GestionLibros {
 		// Mostrar todos los libros en el sistema
 		mostrarTodosLibros(libros);
 
-		// Seleccion del libro a actualizar
-		libro = Validacion.leerInt("\nSeleccione el libro a actualizar");
+		if (libros.size() != 0) {
+			// Seleccion del libro a actualizar
+			libro = Validacion.leerInt("\nSeleccione el libro a actualizar");
 
-		libro--;
-		// Comprobacion de la existencia o estado de baja del libro, en cuyo caso se
-		// muestra un aviso
-		if (!((libros.get(libro) == null) || (libros.get(libro).getCantEjemplares() == 0))) {
-			libros.get(libro).leerDatos(materias);
+			libro--;
+			// Comprobacion de la existencia o estado de baja del libro, en cuyo caso se
+			// muestra un aviso
+			if (!((libros.get(libro) == null) || (libros.get(libro).getCantEjemplares() == 0))) {
+				libros.get(libro).leerDatos(materias);
 
-			libros.get(libro).mostrarDatos();
+				libros.get(libro).mostrarDatos();
 
-			Validacion.validarRespuesta();
+				Validacion.validarRespuesta();
 
+			} else {
+				System.out.println(
+						"\nEl libro no se encuentra en el sistema o no se encuentran ejemplares sin dar de baja");
+
+				Validacion.solicitarIntro();
+			}
 		} else {
-			System.out
-					.println("\nEl libro no se encuentra en el sistema o no se encuentran ejemplares sin dar de baja");
-
-			Validacion.solicitarIntro();
+			System.out.println("\nNo hay libros registrados");
 		}
+
 	}
 
 	public static void listarLibros(ArrayList<Libro> libros) {
@@ -226,7 +236,7 @@ public class GestionLibros {
 		Validacion.solicitarIntro();
 	}
 
-	// Funcion que muestra todos los libros junnto a su indice
+	// Funcion que muestra todos los libros junnto a su codigo
 	public static void mostrarTodosLibros(ArrayList<Libro> libros) {
 		for (Libro l : libros) {
 			System.out.println(l.mostrarDatos());

@@ -74,54 +74,59 @@ public class GestionMaterias {
 		String materia;
 		boolean existe = false, continuar = false;
 
-		for (int i = 0; i < materias.size(); i++) {
-			System.out.println(materias.get(i).mostrarMateria() + (i + 1));
-		}
-
-		System.out.println("\nSeleccione la materia a eliminar mediante su codigo");
-
-		do {
-
-			m = Validacion.leerNum();
-
-		} while ((m < materias.size() - 1) && (m > 0));
-
-		m--;
-
-		System.out.println(materias.get(m).mostrarMateria());
-
-		materia = materias.get(m).getNombre();
-
-		for (int i = 0; i < libros.size() && !existe; i++) {
-			if (libros.get(i).getMateria().equalsIgnoreCase(materia)) {
-				existe = true;
-				System.out.println("\nHay libros que pertenecen a esta materia");
-
-				continuar = Validacion.validarRespuesta();
-
-				if (continuar) {
-					materias.remove(m);
-					existe = true;
-				}
+		if (materias.size() != 0) {
+			for (int i = 0; i < materias.size(); i++) {
+				System.out.println(materias.get(i).mostrarMateria() + (i + 1));
 			}
-		}
 
-		if (continuar) {
-			for (int i = 0; i < libros.size(); i++) {
+			System.out.println("\nSeleccione la materia a eliminar mediante su codigo");
+
+			do {
+
+				m = Validacion.leerNum();
+
+			} while ((m < materias.size() - 1) && (m > 0));
+
+			m--;
+
+			System.out.println(materias.get(m).mostrarMateria());
+
+			materia = materias.get(m).getNombre();
+
+			for (int i = 0; i < libros.size() && !existe; i++) {
 				if (libros.get(i).getMateria().equalsIgnoreCase(materia)) {
-					libros.get(i).setMateria(null);
+					existe = true;
+					System.out.println("\nHay libros que pertenecen a esta materia");
+
+					continuar = Validacion.validarRespuesta();
+
+					if (continuar) {
+						materias.remove(m);
+						existe = true;
+					}
 				}
 			}
-		}
 
-		if (!existe) {
-			if (Validacion.validarRespuesta()) {
-				materias.remove(m);
-
-			} else {
-				Validacion.solicitarIntro();
+			if (continuar) {
+				for (int i = 0; i < libros.size(); i++) {
+					if (libros.get(i).getMateria().equalsIgnoreCase(materia)) {
+						libros.get(i).setMateria(null);
+					}
+				}
 			}
+
+			if (!existe) {
+				if (Validacion.validarRespuesta()) {
+					materias.remove(m);
+
+				} else {
+					Validacion.solicitarIntro();
+				}
+			}
+		} else {
+			System.out.println("\nNo hay materias registradas");
 		}
+
 	}
 
 	public static void mostrarMaterias(ArrayList<Materia> materias) {
@@ -130,6 +135,7 @@ public class GestionMaterias {
 		}
 	}
 
+	// Funcion que anuncia la salida del menu de gestion de materias
 	public static void salirMenuMaterias() {
 		System.out.println("\nHa abandonado el menu de gestion de materias");
 

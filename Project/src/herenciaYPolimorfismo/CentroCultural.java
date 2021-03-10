@@ -6,7 +6,7 @@ import java.util.Iterator;
 import daw.com.Pantalla;
 import daw.com.Teclado;
 
-public class CentroCultural {
+public class CentroCultural{
 
 	public static void main(String[] args) {
 		ArrayList<Material> materiales = new ArrayList<Material>();

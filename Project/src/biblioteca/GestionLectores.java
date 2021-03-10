@@ -49,6 +49,8 @@ public class GestionLectores {
 		} while (!seleccion.equals("8"));
 	}
 
+	// Funcion que permite dar de alta un lector, leyendo sus datos y comprobando si
+	// se encuentra ya en el sistema
 	public static void altaLectores(ArrayList<Lector> lectores) {
 		Lector l = new Lector();
 		boolean continuar = false;
@@ -75,33 +77,41 @@ public class GestionLectores {
 		}
 	}
 
+	// Funcion que mediante su codigo, lee un lector y lo marca como baja
 	public static void bajaLectores(ArrayList<Lector> lectores) {
 		int lector = 0;
 		boolean continuar = false;
 
 		mostrarTodosLectores(lectores);
 
-		lector = Validacion.leerInt("\nSeleccione el lector a dar de baja");
-		
-		lector--;
-		
-		continuar = Validacion.validarRespuesta();
+		if (lectores.size() != 0) {
+			lector = Validacion.leerInt("\nSeleccione el lector a dar de baja mediante su codigo");
 
-		if (continuar) {
-			if (lectores.contains(lectores.get(lector)) || lectores.get(lector).isBaja()) {
+			lector--;
 
-				System.out.println("\nEl lector se ha marcado como baja");
-				lectores.get(lector).setBaja(true);
+			continuar = Validacion.validarRespuesta();
 
-				Validacion.solicitarIntro();
+			if (continuar) {
+				if (lectores.contains(lectores.get(lector)) || lectores.get(lector).isBaja()) {
+
+					System.out.println("\nEl lector se ha marcado como baja");
+					lectores.get(lector).setBaja(true);
+
+					Validacion.solicitarIntro();
+				} else {
+					System.out
+							.println("\nEl lector no se encuentra en la base de datos o ya se encuentra dado de baja");
+				}
 			} else {
-				System.out.println("\nEl lector no se encuentra en la base de datos o ya se encuentra dado de baja");
+				System.out.println("\nVolviendo al menu de gestion de lectores");
 			}
 		} else {
-			System.out.println("\nVolviendo al menu de gestion de lectores");
+			System.out.println("\nNo hay lectores registrados");
 		}
 	}
 
+	// Funcion que permite leer un lector mediante su codigo y si esta marcado de
+	// baja, anula la marca
 	public static void anularBajaLectores(ArrayList<Lector> lectores) {
 		int lector = 0;
 		boolean continuar = false;
@@ -113,115 +123,147 @@ public class GestionLectores {
 			}
 		}
 
-		lector = Validacion.leerInt("\nSeleccione el lector al que anular la baja");
-		
-		lector--;
+		if (lectores.size() != 0) {
+			lector = Validacion.leerInt("\nSeleccione el lector al que anular la baja mediante su codigo");
 
-		if (lectores.get(lector).isBaja()) {
+			lector--;
 
-			lectores.get(lector).mostrarDatos();
-			
+			if (lectores.get(lector).isBaja()) {
 
-			continuar = Validacion.validarRespuesta();
+				lectores.get(lector).mostrarDatos();
 
-			if (continuar) {
-				lectores.get(lector).setBaja(false);
+				continuar = Validacion.validarRespuesta();
 
-				System.out.println("\nLa marca de baja se ha suprimido en el lector");
+				if (continuar) {
+					lectores.get(lector).setBaja(false);
 
-				System.out.println("\nVolviendo al menu de gestion de lectores");
+					System.out.println("\nLa marca de baja se ha suprimido en el lector");
 
-				Validacion.solicitarIntro();
+					System.out.println("\nVolviendo al menu de gestion de lectores");
+
+					Validacion.solicitarIntro();
+				} else {
+
+					System.out.println("\nVolviendo al menu de gestion de lectores");
+
+					Validacion.solicitarIntro();
+				}
 			} else {
+
+				System.out.println("\nEl lector no esta de baja");
 
 				System.out.println("\nVolviendo al menu de gestion de lectores");
 
 				Validacion.solicitarIntro();
 			}
 		} else {
-
-			System.out.println("\nEl lector no esta de baja");
-
-			System.out.println("\nVolviendo al menu de gestion de lectores");
-
-			Validacion.solicitarIntro();
+			System.out.println("\nNo hay lectores registrados");
 		}
 
 	}
 
+	// Funcion que lee un lector mediante su codigo y permite actualizar sus datos
 	public static void actualizarLector(ArrayList<Lector> lectores) {
 		int lector = 0;
 		boolean continuar = false;
 
 		mostrarTodosLectores(lectores);
 
-		lector = Validacion.leerInt("\nSeleccione el lector cuya informacion esta para actualizar");
-		lector--;
+		if (lectores.size() != 0) {
+			lector = Validacion
+					.leerInt("\nSeleccione el lector cuya informacion esta para actualizar mediante su codigo");
+			lector--;
 
-		if (lector >= 0 || lector <= lectores.size()) {
-			lectores.get(lector).mostrarDatos();
+			if (lector >= 0 || lector <= lectores.size()) {
+				lectores.get(lector).mostrarDatos();
 
-			continuar = Validacion.validarRespuesta();
+				continuar = Validacion.validarRespuesta();
 
-			if (continuar) {
-				lectores.get(lector).leerDatos();
+				if (continuar) {
+					lectores.get(lector).leerDatos();
 
-				System.out.println("\nDatos de lector actualizados");
+					System.out.println("\nDatos de lector actualizados");
 
-				System.out.println("\nVolviendo al menu de gestion de lectores");
+					System.out.println("\nVolviendo al menu de gestion de lectores");
 
+				} else {
+
+					System.out.println("\nVolviendo al menu de gestion de lectores");
+
+					Validacion.solicitarIntro();
+				}
 			} else {
+				System.out.println("\nEl lector no se encuentra en el sistema");
 
 				System.out.println("\nVolviendo al menu de gestion de lectores");
 
 				Validacion.solicitarIntro();
 			}
 		} else {
-			System.out.println("\nEl lector no se encuentra en el sistema");
-
-			System.out.println("\nVolviendo al menu de gestion de lectores");
-
-			Validacion.solicitarIntro();
+			System.out.println("\nNo hay lectores registrados");
 		}
+
 	}
 
+	// Funcion que lista todos los lectores, marcados de baja o no
 	public static void listarLectores(ArrayList<Lector> lectores) {
 
-		mostrarTodosLectores(lectores);
+		if (lectores.size() != 0) {
+			mostrarTodosLectores(lectores);
 
-		System.out.println("\nFin del listado de lectores");
-		Validacion.solicitarIntro();
-	}
-
-	public static void compactarLectores(ArrayList<Lector> lectores) {
-		for (Lector l : lectores) {
-
-			if (l.isBaja()) {
-				lectores.remove(l);
-			}
+			System.out.println("\nFin del listado de lectores");
+			Validacion.solicitarIntro();
+		} else {
+			System.out.println("\nNo hay lectores registrados");
 		}
 
-		System.out.println("\nFin de la compactacion del sistema de lectores");
 	}
 
+	// Funcion que elimina todos los lectores marcados como baja del sistema
+	public static void compactarLectores(ArrayList<Lector> lectores) {
+
+		if (lectores.size() != 0) {
+			for (Lector l : lectores) {
+
+				if (l.isBaja()) {
+					lectores.remove(l);
+				}
+			}
+
+			System.out.println("\nFin de la compactacion del sistema de lectores");
+		} else {
+			System.out.println("\nNo hay lectores marcados como baja");
+		}
+
+	}
+
+	// Funcion que permite buscar un lector mediante su nombre o apellido, mostrando
+	// todos sus datos
 	public static void buscarLector(ArrayList<Lector> lectores) {
 		String nombre = " ";
 		String apellidos = " ";
 
-		nombre = Validacion.leerString("\nIntroduzca el nombre a buscar");
-		apellidos = Validacion.leerString("\nIntroduzca los apellidos a buscar");
+		if (lectores.size() != 0) {
+			nombre = Validacion.leerString("\nIntroduzca el nombre a buscar");
+			apellidos = Validacion.leerString("\nIntroduzca los apellidos a buscar");
 
-		for (Lector l : lectores) {
-			if (l.getNombre().equalsIgnoreCase(nombre) || l.getApellidos().equalsIgnoreCase(apellidos)) {
-				l.mostrarDatos();
+			for (Lector l : lectores) {
+				if (l.getNombre().equalsIgnoreCase(nombre) || l.getApellidos().equalsIgnoreCase(apellidos)) {
+					l.mostrarDatos();
+				}
 			}
+		} else {
+			System.out.println("\nNo hay lectores registrados");
 		}
+
 	}
 
+	// Funcion que anuncia la salida del menu de gestion de lectores
 	public static void salirMenuLectores() {
 		System.out.println("\nHa abandonado el menu de gestion de lectores");
 	}
 
+	// Funcion que muestra todos los lectores
 	public static void mostrarTodosLectores(ArrayList<Lector> lectores) {
 		for (Lector l : lectores) {
 
@@ -229,7 +271,8 @@ public class GestionLectores {
 			System.out.println((lectores.indexOf(l) + 1));
 		}
 	}
-	
+
+	// Funcion que muestra todos los lectores que no tengan la marca de baja
 	public static void mostrarTodosLectoresSinbaja(ArrayList<Lector> lectores) {
 		for (Lector l : lectores) {
 			if (!l.isBaja()) {

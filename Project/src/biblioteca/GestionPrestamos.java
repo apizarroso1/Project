@@ -49,40 +49,44 @@ public class GestionPrestamos {
 		LocalDate fecha = null;
 		Prestamo p = new Prestamo();
 
-		GestionLibros.mostrarTodosLibros(libros);
+		if (libros.size() != 0 && lectores.size() != 0) {
+			GestionLibros.mostrarTodosLibros(libros);
 
-		libro = Validacion.leerInt("\nSeleccione el libro a tomar prestado mediante su codigo");
-		libro--;
+			libro = Validacion.leerInt("\nSeleccione el libro a tomar prestado mediante su codigo");
+			libro--;
 
-		GestionLectores.mostrarTodosLectoresSinbaja(lectores);
+			GestionLectores.mostrarTodosLectoresSinbaja(lectores);
 
-		lector = Validacion.leerInt("\nSeleccione el lector que realizara el prestamo");
-		lector--;
+			lector = Validacion.leerInt("\nSeleccione el lector que realizara el prestamo mediante su codigo");
+			lector--;
 
-		fecha.now();
+			fecha.now();
 
-		p.setFecha(fecha);
-		p.setLector(lectores.get(lector));
-		p.setLibro(libros.get(libro));
+			p.setFecha(fecha);
+			p.setLector(lectores.get(lector));
+			p.setLibro(libros.get(libro));
 
-		p.mostrarDatos();
+			p.mostrarDatos();
 
-		continuar = Validacion.validarRespuesta();
+			continuar = Validacion.validarRespuesta();
 
-		if (continuar) {
+			if (continuar) {
 
-			cant = libros.get(libro).getCantEjemplares();
-			cant--;
-			libros.get(libro).setCantEjemplares(cant);
-			prestamos.add(p);
+				cant = libros.get(libro).getCantEjemplares();
+				cant--;
+				libros.get(libro).setCantEjemplares(cant);
+				prestamos.add(p);
 
-			System.out.println("\nPrestamo realizado");
+				System.out.println("\nPrestamo realizado");
 
+			} else {
+
+				System.out.println("\nHa cancelado la anotacion de prestamo");
+
+				Validacion.solicitarIntro();
+			}
 		} else {
-
-			System.out.println("\nHa cancelado la anotacion de prestamo");
-
-			Validacion.solicitarIntro();
+			System.out.println("\nNo se han registrado los suficientes datos como para realizar un prestamo");
 		}
 	}
 
@@ -93,46 +97,56 @@ public class GestionPrestamos {
 		int prestamo;
 		boolean continuar = false;
 
-		mostrarTodosPrestamosSinDevolver(prestamos);
+		if (prestamos.size() != 0) {
+			mostrarTodosPrestamosSinDevolver(prestamos);
 
-		prestamo = Validacion.leerInt("\nSeleccione el prestamo a devolver mediante su codigo");
-		prestamo--;
+			prestamo = Validacion.leerInt("\nSeleccione el prestamo a devolver mediante su codigo");
+			prestamo--;
 
-		if (prestamos.contains(prestamos.get(prestamo))) {
+			if (prestamos.contains(prestamos.get(prestamo))) {
 
-			if (!prestamos.get(prestamo).isDevuelto()) {
-				prestamos.get(prestamo).mostrarDatos();
+				if (!prestamos.get(prestamo).isDevuelto()) {
+					prestamos.get(prestamo).mostrarDatos();
 
-				continuar = Validacion.validarRespuesta();
+					continuar = Validacion.validarRespuesta();
 
-				if (continuar) {
-					System.out.println("\nEl prestamo ha sido devuelto");
+					if (continuar) {
+						System.out.println("\nEl prestamo ha sido devuelto");
 
-					prestamos.get(prestamo).setDevuelto(true);
+						prestamos.get(prestamo).setDevuelto(true);
 
-					Validacion.solicitarIntro();
+						Validacion.solicitarIntro();
 
-				} else {
-					System.out.println("\nLa operacion se ha cancelado");
+					} else {
+						System.out.println("\nLa operacion se ha cancelado");
 
-					Validacion.solicitarIntro();
+						Validacion.solicitarIntro();
+					}
 				}
+			} else {
+				System.out.println("\nEl prestamo no existe");
+
+				Validacion.solicitarIntro();
 			}
 		} else {
-			System.out.println("\nEl prestamo no existe");
-
-			Validacion.solicitarIntro();
+			System.out.println("\nNo hay prestamos registrados");
 		}
+
 	}
 
 	// Funcion que lista los libros sin devolver
 	public static void listarMorosos(ArrayList<Prestamo> prestamos) {
 
-		mostrarTodosPrestamosSinDevolver(prestamos);
+		if (prestamos.size() != 0) {
+			mostrarTodosPrestamosSinDevolver(prestamos);
 
-		System.out.println("\nFin del listado de morosos");
+			System.out.println("\nFin del listado de morosos");
 
-		Validacion.solicitarIntro();
+			Validacion.solicitarIntro();
+		} else {
+			System.out.println("\nNo hay prestamos registrados");
+		}
+
 	}
 
 	// Funcion que permite buscar los prestamos de un lector a elegir
@@ -140,35 +154,40 @@ public class GestionPrestamos {
 		int lector;
 		boolean continuar;
 
-		for (Prestamo p : prestamos) {
-			p.mostrarDatos();
-			System.out.println(prestamos.indexOf(p) + 1);
-		}
+		if (prestamos.size() != 0) {
+			for (Prestamo p : prestamos) {
+				p.mostrarDatos();
+				System.out.println(prestamos.indexOf(p) + 1);
+			}
 
-		lector = Validacion.leerInt("\nSeleccione el lector para mostrar sus prestamos mediante su codigo");
-		lector--;
+			lector = Validacion.leerInt("\nSeleccione el lector para mostrar sus prestamos mediante su codigo");
+			lector--;
 
-		System.out.println(prestamos.get(lector).getLector());
+			System.out.println(prestamos.get(lector).getLector());
 
-		continuar = Validacion.validarRespuesta();
+			continuar = Validacion.validarRespuesta();
 
-		if (continuar) {
+			if (continuar) {
 
-			if (!prestamos.get(lector).devuelto) {
-				prestamos.get(lector).mostrarLibroAbreviado();
+				if (!prestamos.get(lector).devuelto) {
+					prestamos.get(lector).mostrarLibroAbreviado();
 
-				System.out.println("\n" + prestamos.get(lector).getFecha());
+					System.out.println("\n" + prestamos.get(lector).getFecha());
 
-				Validacion.solicitarIntro();
+					Validacion.solicitarIntro();
+				} else {
+
+					System.out.println("\nEl lector no tiene libros por devolver");
+					Validacion.solicitarIntro();
+				}
 			} else {
-
-				System.out.println("\nEl lector no tiene libros por devolver");
+				System.out.println("\nLa operacion se ha cancelado");
 				Validacion.solicitarIntro();
 			}
 		} else {
-			System.out.println("\nLa operacion se ha cancelado");
-			Validacion.solicitarIntro();
+			System.out.println("\nNo hay prestamos registrados");
 		}
+
 	}
 
 	// Funcion que muestra todos los prestamos sin devolver
@@ -181,6 +200,7 @@ public class GestionPrestamos {
 		}
 	}
 
+	// Funcion que anuncia la salida del menu de prestamos
 	public static void salirMenuPrestamos() {
 		System.out.println("\nHa abandonado el menu de gestion de prestamos");
 	}

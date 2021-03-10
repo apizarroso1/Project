@@ -34,12 +34,14 @@ public class GestionBusquedas {
 		} while (!seleccion.equals("4"));
 	}
 
+	// Funcion que leyendo un autor busca los libros registrados bajo su nombre
 	public static void buscarPorAutor(ArrayList<Libro> libros) {
 		String autor;
 
-		autor = Validacion.leerString("\nIntroduzca el autor para buscar sus libros");
-
 		if (libros.size() > 0) {
+
+			autor = Validacion.leerString("\nIntroduzca el autor para buscar sus libros");
+
 			for (Libro l : libros) {
 				if (l.getAutor().equalsIgnoreCase(autor)) {
 					System.out.println(l.mostrarDatos());
@@ -55,12 +57,14 @@ public class GestionBusquedas {
 		Validacion.solicitarIntro();
 	}
 
+	// Funcion que leyendo un titulo busca libros
 	public static void buscarPorTitulo(ArrayList<Libro> libros) {
 		String titulo;
 
-		titulo = Validacion.leerString("\nIntroduzca el titulo para buscar libros");
-
 		if (libros.size() > 0) {
+
+			titulo = Validacion.leerString("\nIntroduzca el titulo para buscar libros");
+
 			for (Libro l : libros) {
 				if (l.getTitulo().equalsIgnoreCase(titulo)) {
 					System.out.println(l.mostrarDatos());
@@ -76,12 +80,14 @@ public class GestionBusquedas {
 		Validacion.solicitarIntro();
 	}
 
+	// Funcion que leyendo una materia busca los libros registrados bajo la misma
 	public static void buscarPorMateria(ArrayList<Libro> libros) {
 		String materia;
 
-		materia = Validacion.leerString("\nIntroduzca la materia para buscar las obras que pertenezcan");
-
 		if (libros.size() > 0) {
+
+			materia = Validacion.leerString("\nIntroduzca la materia para buscar las obras que pertenezcan");
+
 			for (Libro l : libros) {
 				if (l.getMateria().equalsIgnoreCase(materia)) {
 					System.out.println(l.mostrarDatos());
@@ -97,6 +103,7 @@ public class GestionBusquedas {
 		Validacion.solicitarIntro();
 	}
 
+	// Funcion que anuncia la salida del menu de busquedas
 	public static void salirMenuBusquedas() {
 		System.out.println("\nHa abandonado el menu de busquedas");
 	}
