@@ -243,4 +243,22 @@ public class GestionLibros {
 			System.out.println((libros.indexOf(l) + 1));
 		}
 	}
+	
+	public static void mostrarTodosLibrosDisponibles(ArrayList<Libro> libros) {
+		for (Libro l : libros) {
+			if (l.getCantEjemplares() != 0) {
+				System.out.println(l.mostrarDatos());
+				System.out.println(libros.indexOf(l) + 1);
+			}
+		}
+	}
+	
+	public static boolean comprobarDisponibilidad(ArrayList<Libro> libros, int libro) {
+		
+		if (libros.get(libro).getCantEjemplares() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -45,49 +45,57 @@ public class GestionPrestamos {
 	public static void anotarPrestamo(ArrayList<Libro> libros, ArrayList<Lector> lectores,
 			ArrayList<Prestamo> prestamos) {
 		boolean continuar = false;
+		boolean exito = false;
 		int libro, lector, cant;
 		LocalDate fecha = null;
 		Prestamo p = new Prestamo();
 
 		if (libros.size() != 0 && lectores.size() != 0) {
-			GestionLibros.mostrarTodosLibros(libros);
+			GestionLibros.mostrarTodosLibrosDisponibles(libros);
 
 			libro = Validacion.leerInt("\nSeleccione el libro a tomar prestado mediante su codigo");
 			libro--;
 
-			GestionLectores.mostrarTodosLectoresSinbaja(lectores);
+			exito = GestionLibros.comprobarDisponibilidad(libros, libro);
 
-			lector = Validacion.leerInt("\nSeleccione el lector que realizara el prestamo mediante su codigo");
-			lector--;
+			if (exito) {
+				GestionLectores.mostrarTodosLectoresSinbaja(lectores);
 
-			fecha.now();
+				lector = Validacion.leerInt("\nSeleccione el lector que realizara el prestamo mediante su codigo");
+				lector--;
 
-			p.setFecha(fecha);
-			p.setLector(lectores.get(lector));
-			p.setLibro(libros.get(libro));
+				fecha = LocalDate.now();
 
-			p.mostrarDatos();
+				p.setFecha(fecha);
+				p.setLector(lectores.get(lector));
+				p.setLibro(libros.get(libro));
 
-			continuar = Validacion.validarRespuesta();
+				p.mostrarDatos();
 
-			if (continuar) {
+				continuar = Validacion.validarRespuesta();
 
-				cant = libros.get(libro).getCantEjemplares();
-				cant--;
-				libros.get(libro).setCantEjemplares(cant);
-				prestamos.add(p);
+				if (continuar) {
 
-				System.out.println("\nPrestamo realizado");
+					cant = libros.get(libro).getCantEjemplares();
+					cant--;
+					libros.get(libro).setCantEjemplares(cant);
+					prestamos.add(p);
 
+					System.out.println("\nPrestamo realizado");
+
+				} else {
+
+					System.out.println("\nHa cancelado la anotacion de prestamo");
+
+					Validacion.solicitarIntro();
+				}
 			} else {
-
-				System.out.println("\nHa cancelado la anotacion de prestamo");
-
-				Validacion.solicitarIntro();
+				System.out.println("\nNo se han registrado los suficientes datos como para realizar un prestamo");
 			}
 		} else {
-			System.out.println("\nNo se han registrado los suficientes datos como para realizar un prestamo");
+			System.out.println("\nNo se dispone de ejemplares del libro seleccionado");
 		}
+
 	}
 
 	// Funcion que si recibe los datos correctos de la devolucion del prestamo,

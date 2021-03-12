@@ -277,6 +277,7 @@ public class GestionLectores {
 		for (Lector l : lectores) {
 			if (!l.isBaja()) {
 				l.mostrarDatos();
+				System.out.println(lectores.indexOf(l) + 1);
 			}
 		}
 	}
