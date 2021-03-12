@@ -281,5 +281,7 @@ public class GestionLectores {
 			}
 		}
 	}
+	
+	public static void borrame();
 
 }
