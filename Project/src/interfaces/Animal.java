@@ -1,7 +1,5 @@
 package interfaces;
 
-
-
 public class Animal {
 	private String tipo;
 	private String continente;
