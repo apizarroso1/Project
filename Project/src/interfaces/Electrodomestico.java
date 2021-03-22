@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import daw.com.Pantalla;
 import daw.com.Teclado;
 
-public abstract class Electrodomestico implements Comparable<Electrodomestico>{
+public abstract class Electrodomestico implements Comparable<Electrodomestico> {
 	private String identificador;
 	private int stock;
 	private float precioBase;
@@ -16,10 +16,10 @@ public abstract class Electrodomestico implements Comparable<Electrodomestico>{
 	public Electrodomestico(String identificador, int stock, float precioBase, Color color, Consumo consumo, int masa) {
 		this.identificador = identificador;
 		this.stock = stock;
-		this.precioBase = precioBase;
+		setPrecioBase(precioBase);
 		this.color = color;
 		this.consumo = consumo;
-		this.masa = masa;
+		setMasa(masa);
 	}
 
 	public Electrodomestico() {
@@ -174,6 +174,7 @@ public abstract class Electrodomestico implements Comparable<Electrodomestico>{
 			break;
 		}
 
+		// Invertirlo para cumplir el algoritmo voraz
 		if (masa < 20) {
 			bonus = +10;
 		} else {
@@ -197,5 +198,26 @@ public abstract class Electrodomestico implements Comparable<Electrodomestico>{
 	public int compareTo(Electrodomestico e) {
 		return identificador.compareTo(e.identificador);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((identificador == null) ? 0 : identificador.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Electrodomestico other = (Electrodomestico) obj;
+		if (identificador == null) {
+			if (other.identificador != null)
+				return false;
+		} else if (!identificador.equals(other.identificador))
+			return false;
+		return true;
+	}
+	
+	
 
 }

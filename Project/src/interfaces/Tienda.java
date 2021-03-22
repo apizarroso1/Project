@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import daw.com.Pantalla;
@@ -102,8 +103,9 @@ public class Tienda {
 
 	public ArrayList<Electrodomestico> ordenarInventario() {
 		ArrayList<Electrodomestico> electrodomesticos2 = crearCopia();
-
-		Collections.sort(electrodomesticos2);
+		Comparator <Electrodomestico> comparador = new ComparadorPorPrecio();
+		
+		Collections.sort(electrodomesticos2, comparador);
 
 		return electrodomesticos2;
 	}
@@ -111,7 +113,7 @@ public class Tienda {
 	public float calcularTotalInventario() {
 		float total = 0;
 		for (Electrodomestico e : electrodomesticos) {
-			total = +e.calcularPrecio();
+			total = +e.calcularPrecio() * e.getStock();
 		}
 
 		return total;
